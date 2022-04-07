@@ -1,0 +1,70 @@
+
+@mixin flex($flex-alignItems: flex-start, $flex-justifyContent: flex-start, $flex-flexWrap: nowrap, $flex-flexDirection: row){
+    display: flex;
+    flex-direction: $flex-flexDirection;
+    align-items: $flex-alignItems;
+    justify-content: $flex-justifyContent;
+    flex-wrap: $flex-flexWrap;
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+
+body{
+    font-family: 'Gilroy';
+    background: #262626;
+    @include flex(center, space-between, nowrap, column);
+    min-height: 100vh;
+}
+
+
+
+a{
+    text-decoration: none;
+    outline: none;
+    color: inherit;	
+    &:hover{
+        text-decoration: none;
+    }
+}
+
+p{
+    margin-bottom: 0;
+}
+
+
+input, textarea, select{
+    font-family: 'Gilroy';
+    box-shadow: none;
+}
+
+button{
+    border: none;
+    background: none;
+    font-family: 'Gilroy';
+    outline: none;
+    cursor: pointer;
+}
+
+
+.container{
+    width: 100%;
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 0 25px;
+    // overflow: hidden;
+    @media (max-width: 500px) {
+        padding: 0 15px;
+    }  
+}
+
+// section, footer, header{
+//     overflow: hidden;
+// }
