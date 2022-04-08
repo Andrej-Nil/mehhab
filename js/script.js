@@ -56,13 +56,13 @@ jQuery(document).ready(function ($) {
   // или "два-в-одном", вместо двух последних строк:
 
 
-  $('.sidebar__list .arr').click(function (e) {
-    e.preventDefault();
-    var link = $(this).closest('a');
-    var li = $(link).closest('li');
-    $(li).toggleClass('active');
-    sidebarH();
-  });
+  //$('.sidebar__list').on('click', '.arr', function (e) {
+  //  e.preventDefault();
+  //  var link = $(this).closest('a');
+  //  var li = $(link).closest('li');
+  //  $(li).toggleClass('active');
+  //  sidebarH();
+  //});
 
   $('.tabs__nav a').click(function (e) {
     e.preventDefault();
@@ -122,14 +122,10 @@ jQuery(document).ready(function ($) {
     },
   });
 
-
-
   $('.product__added .close').click(function (e) {
     e.preventDefault();
     $('.product__added').addClass('closed');
   });
-
-
   $('.catalog__item .catalog__item__link').click(function (e) {
     e.preventDefault();
     var th = $(this);
@@ -146,19 +142,4 @@ jQuery(document).ready(function ($) {
       $(sub).addClass('hidden');
     }
   });
-
-
 });
-
-
-
-
-
-
-
-
-
-
-
-
-

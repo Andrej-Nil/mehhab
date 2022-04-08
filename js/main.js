@@ -5,13 +5,19 @@ class Server {
   constructor() {
     this.POST = 'GET';
     this.GET = 'GET';
-    this.dataCreator = new DataCreator()
+    this.menuApi = '../json/sidebar.json';
+    this.dataCreator = new DataCreator();
   }
 
 
   sendForm = async ($form) => {
     const data = this.dataCreator.getFormData($form);
     return await this.getResponse(this.POST, data.data, data.api);
+  }
+
+  getMenuList = async (id) => {
+    const data = this.dataCreator.createFormData({ id });
+    return this.getResponse(this.POST, data, this.menuApi);
   }
 
   getResponse = async (method, data, api) => {
@@ -40,7 +46,7 @@ class Server {
       };
     })
   }
-}
+};
 
 class DataCreator {
   constructor() {
@@ -55,9 +61,94 @@ class DataCreator {
       api: $form.action
     }
   }
+
+  createFormData = (data) => {
+    data._token = this._token;
+    const formData = new FormData();
+    for (let key in data) {
+      formData.append(`${key}`, data[key])
+    }
+    return formData;
+  }
+
   getToken = () => {
     return document.querySelector('[name="csrf-token"]').content;
   }
+}
+
+class Render {
+  constructor() {
+
+  }
+
+  renderMenuList = ($parent, list) => {
+
+    this._render($parent, this.getMenuListHtml, list);
+  }
+
+  renderMenuItemList = ($parent, list) => {
+
+    this._render($parent, this.getMenuItemListHtml, list);
+  }
+
+  getMenuListHtml = (item) => {
+
+    let subMenuOpen = '';
+    let subMenuList = '';
+    if (item.isSubmenu) {
+      subMenuOpen = `<img src="img/arr-bottom.svg" alt="" class="arr" data-status="close" ></img>`
+      subMenuList = (/*html*/`
+        <div data-id=${item.id} class="sidebar__list__content">
+          
+          <ul data-load="0" class="sidebar__list__sub">
+            <span data-message class="message sidebar__message"></span>
+          </ul>
+          
+        </div>
+      `)
+    }
+    return (/*html*/ `
+      <li>
+        <p>
+          <a href=${item.slug}>${item.title}</a>
+          ${subMenuOpen}
+        </p>
+        ${subMenuList}
+      </li>
+    `)
+  }
+
+  getMenuItemListHtml = (item) => {
+    return (/*html*/`
+      <li>
+        <p>
+          <a href=${item.slug}>${item.title}</a>
+        </p>
+      </li>
+    `)
+
+  }
+
+  getMarkList = (getMarkFun, arr) => {
+    let htmlStr = ''
+    arr.forEach((item) => {
+      htmlStr += getMarkFun(item);
+    })
+    return htmlStr;
+  }
+
+  _render($parent, getMarkFun, argForGetMarkFun = null, where = 'beforeend') {
+    let htmlStr = '';
+    if (argForGetMarkFun === null) {
+      htmlStr = getMarkFun();
+    } else if (Array.isArray(argForGetMarkFun)) {
+      htmlStr = this.getMarkList(getMarkFun, argForGetMarkFun);
+    } else {
+      htmlStr = getMarkFun(argForGetMarkFun);
+    }
+    $parent.insertAdjacentHTML(where, htmlStr);
+  }
+
 }
 
 class Form {
@@ -160,12 +251,36 @@ class Form {
     }
 
   }
-
-
   listeners = () => {
     this.$form.addEventListener('input', this.inputHandler);
     this.$form.addEventListener('submit', this.sendHanler);
   }
+}
+
+class Message {
+  constructor() {
+    this.loadText = "Загружаю...";
+    this.errorText = "Произошла ошибка, повторите позже.";
+  }
+
+  showMessage = ($message, text = this.loadText) => {
+    this.setText($message, text);
+    $message.classList.add('show');
+  }
+
+  hideMessage = ($message, text = '') => {
+    $message.classList.remove('show');
+    this.setText($message, text);
+  }
+
+  setErrorText = ($message, text = this.errorText) => {
+    this.setText($message, text)
+  }
+
+  setText = ($message, text = this.loadText) => {
+    $message.innerHTML = text;
+  }
+
 }
 
 class Modal {
@@ -203,7 +318,7 @@ class Modal {
   }
 
   listener = () => {
-    document.addEventListener('click', this.clickHandler);
+    this.$modal.addEventListener('click', this.clickHandler);
     if (this.$btnForOpen) {
       this.$btnForOpen.addEventListener('click', this.open);
     }
@@ -223,26 +338,25 @@ class ModalWithForm extends Modal {
     this.$submitBtn = this.$modal.querySelector('[type="button"]');
     this.$message = this.$modal.querySelector('[data-message]');
     this.response = null;
-    this.loadText = "Идет отправка..."
-    this.errorText = "Произошла ошибка, повторите позже."
+
   }
 
   sendForm = async () => {
-    this.showMessage(this.loadText);
+    message.showMessage(this.$message, 'Идет отправка...');
     this.response = await this.form.send();
     this.resSendFormHandler();
   }
 
   resSendFormHandler = () => {
     if (!this.response) {
-      this.hideMessage();
+      message.hideMessage(this.$message);
       return;
     }
 
     if (this.response.status) {
-      this.failSending(this.errorText);
+      message.setErrorText(this.$message);
     } else if (this.response.rez == 0) {
-      this.failSending(this.response.error.desc);
+      message.setErrorText(this.$message, this.response.error.desc);
     } else {
       this.sucssesSending();
     }
@@ -252,32 +366,125 @@ class ModalWithForm extends Modal {
     this.close();
     setTimeout(() => {
       this.form.clear();
-      this.hideMessage();
+      message.hideMessage(this.$message);
       callbackModalSucsses.open();
     }, 300);
   }
 
-  failSending = (text = '') => {
-    this.$message.innerHTML = text;
-  };
-
-  showMessage = (text) => {
-    this.$message.innerHTML = text;
-    this.$message.classList.add('show');
+  clickHandler = (e) => {
+    if (e.target.closest('.close')) {
+      message.hideMessage(this.$message);
+    }
   }
 
-  hideMessage = () => {
-    this.$message.classList.remove('show');
-    this.$message.innerHTML = '';
-  }
   listener = () => {
     this.$submitBtn.addEventListener('click', this.sendForm);
+    this.$modal.addEventListener('click', this.clickHandler);
   }
 }
 
+class SidebarMenu {
+  constructor() {
+    this.$sidebarMenu = document.querySelector('#sidebarMenu');
+    this.init();
+  }
 
+  init = () => {
+    if (!this.$sidebarMenu) return;
+
+    this.$sidebarList = this.$sidebarMenu.querySelector('#sidebarList');
+    this.$message = this.$sidebarMenu.querySelector('[data-message]');
+    this.listener();
+    this.createSidebarList()
+  }
+
+  createSidebarList = async () => {
+    message.showMessage(this.$message);
+    const id = this.$sidebarMenu.dataset.id
+    const response = await server.getMenuList(id);
+    this.resultHandler(this.sucssesSidebarResponse, this.$message, this.$sidebarList, response);
+  }
+
+  toggleSubmenu = ($btn) => {
+    if ($btn.dataset.status == 'close') {
+      this.openSubmenu($btn);
+    } else {
+      this.closeSubmenu($btn);
+    }
+
+  }
+
+  openSubmenu = ($btn) => {
+    const $li = $btn.closest('li');
+    const $subContent = $li.querySelector('.sidebar__list__content');
+    const $sublist = $li.querySelector('.sidebar__list__sub');
+    if ($sublist.dataset.load == 0) {
+      this.createSubmenuList($sublist);
+    }
+    const sublistHeight = $sublist.offsetHeight;
+    $li.classList.add('active');
+    $subContent.style.height = sublistHeight + 'px';
+    $btn.dataset.status = 'open';
+  }
+
+  closeSubmenu = ($btn) => {
+    const $li = $btn.closest('li');
+    const $subContent = $li.querySelector('.sidebar__list__content');
+    $li.classList.remove('active');
+    $subContent.style.height = '0px';
+    $btn.dataset.status = 'close';
+  }
+
+  createSubmenuList = async ($sublist) => {
+    const $message = $sublist.querySelector('[data-message]');
+    const id = $sublist.dataset.id
+    message.showMessage($message);
+    const response = await server.getMenuList(id);
+    this.resultHandler(this.sucssesSubmenuResponse, $message, $sublist, response);
+  }
+
+  sucssesSidebarResponse = ($message, $list, data) => {
+    message.hideMessage($message);
+    render.renderMenuList($list, data);
+  };
+
+  sucssesSubmenuResponse = ($message, $list, data) => {
+    $list.dataset.load = 1;
+    message.hideMessage($message);
+    render.renderMenuItemList($list, data);
+    this.openSubmenu($list);
+  }
+
+  resultHandler = (sucssesFun, $message, list, response) => {
+    if (!response) {
+      message.hideMessage($message);
+      return;
+    }
+
+    if (response.status) {
+      message.setErrorText($message, 'Произошла ошибка, попробуйте обновить сраницу.');
+    } else if (response.rez == 0) {
+      message.setErrorText($message, response.error.desc);
+    } else {
+      sucssesFun($message, list, response.content);
+    }
+  }
+
+  clickHandler = (e) => {
+    if (e.target.closest('.arr')) {
+      this.toggleSubmenu(e.target);
+    }
+  }
+
+  listener = () => {
+    this.$sidebarMenu.addEventListener('click', this.clickHandler)
+  }
+}
 
 const server = new Server();
+const message = new Message();
+const render = new Render();
+const sidebarMenu = new SidebarMenu();
 const callbackModal = new ModalWithForm('#callback__popup', '#callback__form');
 const callbackModalSucsses = new Modal('#thanks__callback__popup');
 

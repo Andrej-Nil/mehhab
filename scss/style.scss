@@ -18,6 +18,20 @@
   overflow: hidden;
 }
 
+.message {
+  display: none;
+
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px 15px;
+  background: #fff;
+}
+
+.message.show {
+  display: flex;
+}
+
 .header {
   width: 100%;
   background: #fff;
@@ -399,11 +413,18 @@ h3 {
 }
 
 .sidebar {
+  position: relative;
   background: #424242;
   border: 0.5px solid #777777;
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.15);
   padding: 6px 0;
   width: 100%;
+}
+
+.sidebar__message {
+  top: 0;
+  left: 0;
+  color: #000;
 }
 
 .sidebar__wrap {
@@ -424,43 +445,52 @@ h3 {
   line-height: 130%;
   color: #ffffff;
   & > li {
+    border-top: 0.5px solid #77777700;
+    border-bottom: 0.5px solid #77777700;
+    transition: 0.3s;
+    p {
+      display: flex;
+    }
     a {
       @include flex(center, space-between);
+      flex-grow: 1;
       padding: 4px 18px;
-      border-top: 0.5px solid #77777700;
-      border-bottom: 0.5px solid #77777700;
-      transition: 0.3s;
-      &:hover {
-        border-color: #777777;
-      }
     }
     .arr {
-      margin-left: 20px;
+      //margin-left: 20px;
+      cursor: pointer;
+      padding: 4px 10px;
       transition: 0.3s;
     }
+
     &.active {
-      & > a {
+      & > p {
         background: #d20018;
       }
       .arr {
         transform: rotateX(180deg);
       }
-      .sidebar__list__sub {
+      .sidebar__list__content {
         // display: block;
         visibility: visible;
-        max-height: 500px;
         // overflow: auto;
         opacity: 1;
       }
     }
+    &:hover {
+      border-color: #777777;
+    }
+  }
+  .sidebar__list__content {
+    // display: none;
+    overflow: hidden;
+    visibility: hidden;
+    height: 0;
+    opacity: 0;
+    transition: 0.3s;
   }
   .sidebar__list__sub {
     list-style-type: none;
-    // display: none;
-    visibility: hidden;
-    max-height: 0;
-    opacity: 0;
-    transition: 0.3s;
     li {
       a {
         padding-left: 30px;
@@ -2888,27 +2918,15 @@ h3 {
       }
     }
   }
-
-  .form__message {
-    position: absolute;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 10px 15px;
-    min-height: 50px;
-    bottom: 0;
-    left: 0;
-    background: #fff;
-    font-size: 20px;
-  }
-
-  .form__message.show {
-    display: flex;
-  }
-
   .form__popup__wrap {
     width: 100%;
+  }
+  .form__message {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    min-height: 50px;
+    font-size: 20px;
   }
 
   .top {
