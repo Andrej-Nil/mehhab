@@ -889,7 +889,7 @@ h3 {
 
 .search__wrap {
   width: 100%;
-  padding: 30px 290px 94px 0;
+  padding: 30px 0 94px 0;
 }
 
 @media (max-width: 1070px) {
@@ -964,6 +964,7 @@ h3 {
   width: 100%;
   display: none;
   background: #424242;
+  z-index: 10;
 }
 
 @media (max-width: 630px) {
@@ -1302,7 +1303,7 @@ h3 {
 
 .catalog-item__label {
   width: 100%;
-  color: #777777;
+  color: #fff;
   padding: 3px 20px;
   transition: 0.3s linear;
   display: flex;
@@ -1312,6 +1313,12 @@ h3 {
   flex-wrap: nowrap;
   min-height: 50px;
   cursor: pointer;
+}
+
+@media (min-widht: 690px) {
+  .catalog-item__label {
+    color: #777777;
+  }
 }
 
 .catalog-sublist {

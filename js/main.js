@@ -1,11 +1,42 @@
 'use strict';
 const body = document.querySelector('body');
 
+class Debaunce {
+  constructor() { }
+  debaunce = (fn, ms) => {
+    let timeout;
+    return function () {
+      const fnCall = () => {
+        fn(arguments[0])
+      }
+      clearTimeout(timeout);
+      timeout = setTimeout(fnCall, ms)
+    };
+  }
+}
+
+class WordEndingsInstaller {
+  constructor() {
+    this.endOfWords = ['', 'а', 'ов'];
+  }
+
+  convertEnding = (num, word) => {
+    const ending = this.getEnding(num);
+    return word + ending
+  }
+
+  getEnding(number) {
+    const cases = [2, 0, 1, 1, 1, 2];
+    return this.endOfWords[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
+  }
+}
+
 class Server {
   constructor() {
     this.POST = 'GET';
     this.GET = 'GET';
     this.menuApi = '../json/sidebar.json';
+    this.searchApi = '../json/search.json';
     this.dataCreator = new DataCreator();
   }
 
@@ -18,6 +49,11 @@ class Server {
   getMenuList = async (id) => {
     const data = this.dataCreator.createFormData({ id });
     return this.getResponse(this.POST, data, this.menuApi);
+  }
+
+  getSearchPropuct = async (value) => {
+    const data = this.dataCreator.createFormData({ value });
+    return this.getResponse(this.POST, data, this.searchApi);
   }
 
   getResponse = async (method, data, api) => {
@@ -77,9 +113,6 @@ class DataCreator {
 }
 
 class Render {
-  constructor() {
-
-  }
 
   renderMenuList = ($parent, list) => {
 
@@ -93,6 +126,11 @@ class Render {
 
   renderCatalogSubitem = ($parent, list) => {
     this._render($parent, this.getCatalogSubitemHtml, list)
+  }
+
+  renderSearchList = ($searchList, response) => {
+    this.clearParent($searchList);
+    this._render($searchList, this.getSearchListHtml, response)
   }
 
   getMenuListHtml = (item) => {
@@ -141,6 +179,51 @@ class Render {
     `)
   }
 
+  getSearchListHtml = (response) => {
+    const searchCardList = this.getMarkList(this.getSearchCardListHtml, response.content);
+    const searchListFooter = this.getSearchListFooterHtml(response);
+    return searchCardList + searchListFooter;
+
+  }
+
+  getSearchCardListHtml = (item) => {
+    const isInBasket = item.isBasket ? 'checked' : '';
+    const isInFavorite = item.isFavorite ? 'checked' : '';
+    return (/*html */`
+    <div data-product="${item.id}" class="search__form__sub__item">
+    <a href="${item.slug}" class="name">${item.title}</a>
+    <div class="sub__item__nav">
+        <label for="" class="add__cart">
+            <input data-basket type="checkbox" ${isInBasket}>
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M20.0815 12.3356L20.0803 12.3377C19.8158 12.8202 19.3001 13.1429 18.7071 13.1429H9.12857H8.5373L8.25236 13.6609L6.83807 16.2324L6.25605 17.2906C6.0929 16.8795 6.09838 16.3953 6.34103 15.9481L8.075 12.8141L8.32343 12.3651L8.10352 11.9015L3.47495 2.14288L3.2039 1.57143H2.57143H1V1H3.56934L4.50783 2.99679L4.77791 3.57143H5.41286H24.4414C24.6566 3.57143 24.7886 3.80525 24.6877 3.98528L24.6877 3.98527L24.6844 3.99128L20.0815 12.3356ZM7.71429 18.2857C7.21293 18.2857 6.78666 18.0578 6.50539 17.7143H7.71429H22.1429V18.2857H7.71429ZM6.15571 23.1429C6.15571 22.2743 6.8588 21.5714 7.71429 21.5714C8.57629 21.5714 9.28571 22.2809 9.28571 23.1429C9.28571 24.0049 8.57629 24.7143 7.71429 24.7143C6.8588 24.7143 6.15571 24.0114 6.15571 23.1429ZM19.0129 23.1429C19.0129 22.2743 19.7159 21.5714 20.5714 21.5714C21.4334 21.5714 22.1429 22.2809 22.1429 23.1429C22.1429 24.0049 21.4334 24.7143 20.5714 24.7143C19.7159 24.7143 19.0129 24.0114 19.0129 23.1429Z"
+                    stroke="white" stroke-width="2" />
+            </svg>
+        </label>
+        <label for="" class="favorite">
+            <input data-favorite type="checkbox" ${isInFavorite}>
+            <svg width="26" height="23" viewBox="0 0 26 23" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M12.25 3.28161L12.9995 4.13022L13.749 3.28161C14.978 1.89016 16.8769 1 18.8495 1C22.3359 1 24.9995 3.61962 24.9995 6.89373C24.9995 8.92207 24.0626 10.847 22.1901 13.0544C20.3073 15.2738 17.5945 17.6479 14.2263 20.5927L14.2249 20.5939L12.997 21.6716L11.7735 20.6059C11.7731 20.6055 11.7727 20.6052 11.7723 20.6048C8.40445 17.654 5.69197 15.2771 3.80917 13.0562C1.93638 10.8471 0.999512 8.92209 0.999512 6.89373C0.999512 3.61962 3.66308 1 7.14951 1C9.12211 1 11.021 1.89016 12.25 3.28161Z"
+                    stroke="white" stroke-width="2" />
+            </svg>
+        </label>
+    </div>
+    <span class="cost">${item.price} ₽</span>
+</div>
+     `)
+  }
+
+  getSearchListFooterHtml = (response) => {
+    const wordThisEnding = wordEndingsInstaller.convertEnding(response.count, 'товар');
+    return (/*html */`
+      <button href="#" type="submit" class="view__all">Показать все результаты (${response.count} ${wordThisEnding})</button>
+    `);
+  }
+
   getMarkList = (getMarkFun, arr) => {
     let htmlStr = ''
     arr.forEach((item) => {
@@ -159,6 +242,10 @@ class Render {
       htmlStr = getMarkFun(argForGetMarkFun);
     }
     $parent.insertAdjacentHTML(where, htmlStr);
+  }
+
+  clearParent = ($el) => {
+    $el.innerHTML = ''
   }
 
 }
@@ -575,32 +662,88 @@ class CatalogList {
     $item.dataset.load = "1";
   }
 
-  //resultHandler = (sucssesFun, $message, list, response) => {
-  //  if (!response) {
-  //    message.hideMessage($message);
-  //    return;
-  //  }
-
-  //  if (response.status) {
-  //    message.setErrorText($message, 'Произошла ошибка, попробуйте обновить сраницу.');
-  //  } else if (response.rez == 0) {
-  //    message.setErrorText($message, response.error.desc);
-  //} else {
-  //  sucssesFun($message, list, response.content);
-  //}
-  //}
-
   listener = () => {
     document.addEventListener('click', this.clickHandler);
   }
 }
 
+class Search {
+  constructor(id) {
+    this.$form = document.querySelector(id);
+    this.init();
+  }
+
+  init = () => {
+    if (!this.$form) return;
+
+    this.$input = this.$form.querySelector('input');
+    this.$searchList = this.$form.querySelector('.search__form__sub');
+    this.value = '';
+    this.response = null;
+    this.listeners()
+  }
+
+
+  changeValueHandler = () => {
+    this.value = this.getPreparedValue();
+    if (this.value.lenght < 2) return;
+    this.createProductList();
+  }
+
+  getPreparedValue = () => {
+    return this.$input.value.trim().toLowerCase();
+  };
+
+  createProductList = async () => {
+    this.response = await server.getSearchPropuct(this.value);
+    this.resultHandler();
+  }
+
+  resultHandler = () => {
+    if (this.response.rez == '1') {
+      this.succesHandler();
+    } else {
+      return;
+    }
+  }
+
+  succesHandler = () => {
+    render.renderSearchList(this.$searchList, this.response);
+    this.openList();
+  }
+
+  clickHandler = (e) => {
+    if (!e.target.closest('form')) {
+      this.closeList()
+    }
+  }
+
+  listeners = () => {
+    const changeValueHandler = debaunce.debaunce(this.changeValueHandler, 300);
+    this.$input.addEventListener('input', changeValueHandler);
+    document.addEventListener('click', this.clickHandler)
+  }
+
+  openList = () => {
+    this.$form.classList.add('open');
+  }
+
+  closeList = () => {
+    this.$form.classList.remove('open');
+  }
+}
+
+
+const debaunce = new Debaunce();
 const server = new Server();
 const message = new Message();
+const wordEndingsInstaller = new WordEndingsInstaller()
 const render = new Render();
 const sidebarMenu = new SidebarMenu();
 const callbackModal = new ModalWithForm('#callback__popup', '#callback__form');
 const callbackModalSucsses = new Modal('#thanks__callback__popup');
 const catalogList = new CatalogList('#catalogList');
+const search = new Search('#searchProduct');
+
 
 
