@@ -126,20 +126,21 @@ jQuery(document).ready(function ($) {
     e.preventDefault();
     $('.product__added').addClass('closed');
   });
-  $('.catalog__item .catalog__item__link').click(function (e) {
-    e.preventDefault();
-    var th = $(this);
-    var item = $(th).closest('.catalog__item');
-    var sub = $(item).find('.catalog__items__sub');
-    // var dataCatalog = $(th).attr('data-catalog');
-    // $(sub).toggleClass('open');
-    $('.catalog__items__sub').not(sub).removeClass('open').addClass('hidden');
-    if ($(sub).hasClass('hidden')) {
-      $(sub).addClass('open');
-      $(sub).removeClass('hidden');
-    } else {
-      $(sub).removeClass('open');
-      $(sub).addClass('hidden');
-    }
-  });
+
+  //$('.catalog-item').click(function (e) {
+  //  e.preventDefault();
+  //  var th = $(this);
+  //  var item = $(th).closest('.catalog-item');
+  //  var sub = $(item).find('.catalog-sublist');
+  //  // var dataCatalog = $(th).attr('data-catalog');
+  //  // $(sub).toggleClass('open');
+  //  $('.catalog-sublist').not(sub).removeClass('open').addClass('hidden');
+  //  if ($(sub).hasClass('hidden')) {
+  //    $(sub).addClass('open');
+  //    $(sub).removeClass('hidden');
+  //  } else {
+  //    $(sub).removeClass('open');
+  //    $(sub).addClass('hidden');
+  //  }
+  //});
 });

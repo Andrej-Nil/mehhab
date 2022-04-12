@@ -91,6 +91,10 @@ class Render {
     this._render($parent, this.getMenuItemListHtml, list);
   }
 
+  renderCatalogSubitem = ($parent, list) => {
+    this._render($parent, this.getCatalogSubitemHtml, list)
+  }
+
   getMenuListHtml = (item) => {
 
     let subMenuOpen = '';
@@ -127,6 +131,14 @@ class Render {
       </li>
     `)
 
+  }
+
+  getCatalogSubitemHtml = (item) => {
+    return (/*html */`
+    <p class="catalog-subitem">
+      <a href="${item.slug}" class="catalog-subitem__link">${item.title}</a>
+    </p>
+    `)
   }
 
   getMarkList = (getMarkFun, arr) => {
@@ -264,6 +276,7 @@ class Message {
   }
 
   showMessage = ($message, text = this.loadText) => {
+
     this.setText($message, text);
     $message.classList.add('show');
   }
@@ -411,7 +424,6 @@ class SidebarMenu {
     } else {
       this.closeSubmenu($btn);
     }
-
   }
 
   openSubmenu = ($btn) => {
@@ -481,11 +493,114 @@ class SidebarMenu {
   }
 }
 
+class CatalogList {
+  constructor(id) {
+    this.catalogList = document.querySelector(id);
+    this.init();
+  }
+
+  init = () => {
+    if (!this.catalogList) return;
+
+    this.$itemList = this.catalogList.querySelectorAll('[data-sublist]');
+    this.$activeItem = null;
+    this.listener();
+  }
+
+  toggleSublist = ($btn) => {
+    const $item = $btn.closest('[data-item]');
+    if ($item.dataset.load == 0) {
+      this.createSublist($item);
+    }
+    if ($item.classList.contains("open")) {
+      this.closeSublist($item);
+    } else {
+      this.openSublist($item);
+    }
+  }
+
+  openSublist = ($item) => {
+    $item.classList.add('open');
+
+    if (this.$activeItem != $item) {
+      this.closeSublist(this.$activeItem);
+      this.$activeItem = $item;
+    }
+
+  }
+
+  closeSublist = ($item) => {
+    if ($item) {
+      $item.classList.remove('open');
+    }
+  }
+
+  createSublist = async ($item) => {
+
+    const $message = $item.querySelector('[data-message]');
+    const id = $item.dataset.id
+    message.showMessage($message);
+
+    const response = await server.getMenuList(id);
+    this.resultHandler($message, $item, response);
+  }
+
+  clickHandler = (e) => {
+    if (e.target.closest('[data-label]')) {
+      this.toggleSublist(e.target);
+    }
+    if (!e.target.closest('[data-label]')) {
+      this.closeSublist(this.$activeItem);
+    }
+  }
+
+  resultHandler = ($message, $item, response) => {
+    if (!response) {
+      message.showError($message);
+    }
+
+    if (response.status) {
+      message.setErrorText($message, 'Произошла ошибка, попробуйте обновить сраницу.');
+    } else if (response.rez == 0) {
+      message.setErrorText($message, response.error.desc);
+    } else {
+      this.sucssesResponse($message, $item, response.content);
+    }
+  }
+
+  sucssesResponse = ($message, $item, data) => {
+    const $catalogSublist = $item.querySelector('[data-sublist]');
+    message.hideMessage($message);
+    render.renderCatalogSubitem($catalogSublist, data);
+    $item.dataset.load = "1";
+  }
+
+  //resultHandler = (sucssesFun, $message, list, response) => {
+  //  if (!response) {
+  //    message.hideMessage($message);
+  //    return;
+  //  }
+
+  //  if (response.status) {
+  //    message.setErrorText($message, 'Произошла ошибка, попробуйте обновить сраницу.');
+  //  } else if (response.rez == 0) {
+  //    message.setErrorText($message, response.error.desc);
+  //} else {
+  //  sucssesFun($message, list, response.content);
+  //}
+  //}
+
+  listener = () => {
+    document.addEventListener('click', this.clickHandler);
+  }
+}
+
 const server = new Server();
 const message = new Message();
 const render = new Render();
 const sidebarMenu = new SidebarMenu();
 const callbackModal = new ModalWithForm('#callback__popup', '#callback__form');
 const callbackModalSucsses = new Modal('#thanks__callback__popup');
+const catalogList = new CatalogList('#catalogList');
 
 
