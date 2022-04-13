@@ -1390,29 +1390,58 @@ h3 {
 
 .popular__goods__nav__mob {
   display: none;
+}
+
+@media (max-width: 690px) {
+  .popular__goods__nav__mob {
+    display: block;
+  }
+}
+
+.popular__goods__title {
+  display: flex;
+  align-items: center;
   background: #424242;
   margin-bottom: 20px;
   height: 50px;
 }
 
-@media (max-width: 690px) {
-  .popular__goods__nav__mob {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-  }
+.popular__goods__name {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  background: #424242;
+  padding: 10px 15px;
+  font-size: 18px;
+  line-height: 95.2%;
+  height: 100%;
+  color: #ffffff;
 }
 
-.popular__goods__nav__mob .name {
+.popular__goods__options {
+  display: none;
+  width: 100%;
+  position: absolute;
+  z-index: 10;
+  background: #d20018;
+}
+
+.popular__goods__options.active {
+  display: block;
+}
+
+.popular__goods__option {
+  display: flex;
+  align-items: center;
   padding: 10px 15px;
   font-size: 18px;
   line-height: 95.2%;
   color: #ffffff;
+  height: 50px;
+  border-bottom: 1px solid #777777;
 }
 
-.popular__goods__nav__mob .next {
+.popular__goods__next {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -1441,7 +1470,7 @@ h3 {
   }
 }
 
-.popular__goods__nav a {
+.popular__goods__nav span {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -1453,20 +1482,25 @@ h3 {
   line-height: 95.2%;
   color: #ffffff;
   height: 50px;
+  cursor: pointer;
 }
 
 @media (max-width: 690px) {
-  .popular__goods__nav a {
+  .popular__goods__nav span {
     width: 100%;
   }
 }
 
-.popular__goods__nav a.active {
+.popular__goods__nav span.active {
   background: #d20018;
 }
 
 .popular__goods__items {
+  display: none;
   width: 100%;
+}
+
+.popular__goods__items.active {
   display: flex;
   flex-direction: row;
   align-items: stretch;
@@ -4290,6 +4324,7 @@ h3 {
 
 .product__added {
   position: fixed;
+  display: none;
   bottom: 0;
   right: 0;
   z-index: 120;

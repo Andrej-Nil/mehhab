@@ -1064,27 +1064,61 @@ h3 {
 
 .popular__goods__nav__mob {
   display: none;
-  background: #424242;
-  margin-bottom: 20px;
-  height: 50px;
+
   @media (max-width: 690px) {
-    @include flex(center, space-between);
-  }
-  .name {
-    padding: 10px 15px;
-    font-size: 18px;
-    line-height: 95.2%;
-    color: #ffffff;
-  }
-  .next {
-    @include flex(center, center);
-    height: 50px;
-    width: 50px;
-    min-width: 50px;
-    background: #d20018;
+    display: block;
   }
 }
 
+.popular__goods__title {
+  display: flex;
+  align-items: center;
+  background: #424242;
+  margin-bottom: 20px;
+  height: 50px;
+}
+.popular__goods__name {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  background: #424242;
+  padding: 10px 15px;
+  font-size: 18px;
+  line-height: 95.2%;
+  height: 100%;
+  color: #ffffff;
+}
+
+.popular__goods__options {
+  display: none;
+  width: 100%;
+  position: absolute;
+  z-index: 10;
+  background: #d20018;
+}
+
+.popular__goods__options.active {
+  display: block;
+}
+
+.popular__goods__option {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  font-size: 18px;
+  line-height: 95.2%;
+  color: #ffffff;
+  height: 50px;
+  border-bottom: 1px solid #777777;
+}
+
+.popular__goods__next {
+  @include flex(center, center);
+  height: 50px;
+  width: 50px;
+  min-width: 50px;
+  background: #d20018;
+}
 .popular__goods__nav {
   width: 100%;
   @include flex(stretch, space-between);
@@ -1093,7 +1127,7 @@ h3 {
     flex-direction: column;
     display: none;
   }
-  a {
+  span {
     @include flex(center, center);
     width: calc(100% / 3);
     background: #424242;
@@ -1101,6 +1135,7 @@ h3 {
     line-height: 95.2%;
     color: #ffffff;
     height: 50px;
+    cursor: pointer;
     @media (max-width: 690px) {
       width: 100%;
     }
@@ -1111,7 +1146,11 @@ h3 {
 }
 
 .popular__goods__items {
+  display: none;
   width: 100%;
+}
+
+.popular__goods__items.active {
   @include flex(stretch, space-between, wrap);
 }
 
@@ -3118,6 +3157,7 @@ h3 {
 
 .product__added {
   position: fixed;
+  display: none;
   bottom: 0;
   right: 0;
   z-index: 120;

@@ -392,11 +392,14 @@ class Modal {
 
   init = () => {
     if (!this.$modal) return;
-    this.$btnForOpen = document.querySelector(`[data-id="${this.id}"]`);
+
     this.listener();
   }
 
-  open = () => {
+  open = (e) => {
+    if (!e.target.closest(`[data-id="${this.id}"]`)) {
+      return;
+    }
     this.$modal.classList.add('open');
     this.$modal.classList.add('hiding');
     body.classList.add('no-scroll');
@@ -419,9 +422,7 @@ class Modal {
 
   listener = () => {
     this.$modal.addEventListener('click', this.clickHandler);
-    if (this.$btnForOpen) {
-      this.$btnForOpen.addEventListener('click', this.open);
-    }
+    document.addEventListener('click', this.open)
 
   }
 }
@@ -733,6 +734,117 @@ class Search {
   }
 }
 
+class СontentSwitch {
+  constructor(id) {
+    this.$block = document.querySelector(id);
+    this.init()
+  }
+
+  init = () => {
+    if (!this.$block) return;
+
+    this.$tabsWrap = this.$block.querySelector('[data-tabs]');
+    this.$tabsList = this.$tabsWrap.querySelectorAll('[data-tab]');
+    this.$contentItems = this.$block.querySelectorAll('[data-item]');
+    this.listeners();
+  }
+
+  changeTab = ($el) => {
+    const $tab = this.$tabsList[$el.dataset.tab];
+    if ($tab.classList.contains('active')) return;
+    this.toggleTabs($tab);
+    contentSwitchSelect.changeOption($tab);
+  }
+
+  toggleTabs = ($tab) => {
+    this.$tabsList.forEach(($item) => {
+      this.closeTab($item);
+    });
+    this.openTab($tab);
+  }
+
+  openTab = ($item) => {
+    $item.classList.add('active');
+    this.$contentItems[$item.dataset.tab].classList.add('active');
+  }
+
+  closeTab = ($item) => {
+    $item.classList.remove('active');
+    this.$contentItems[$item.dataset.tab].classList.remove('active');
+
+  }
+
+  clickHandler = (e) => {
+    if (e.target.closest('[data-tab]')) {
+      this.changeTab(e.target);
+    }
+  }
+  listeners = () => {
+    this.$tabsWrap.addEventListener('click', this.clickHandler);
+  }
+}
+
+class СontentSwitchSelect {
+  constructor(id) {
+    this.$select = document.querySelector(id);
+    this.init()
+  }
+
+  init = () => {
+    if (!this.$select) return;
+    this.$btn = this.$select.querySelector('[data-btn]');
+    this.$link = this.$select.querySelector('[data-content-link]');
+    this.$optionsWrap = this.$select.querySelector('[data-options]');
+    this.$optionsList = this.$select.querySelectorAll('[data-tab]');
+    this.listeners()
+  }
+
+  toggleOptionWrap = () => {
+    if (this.$btn.dataset.btn == 'close') {
+      this.openOptionsWrap()
+    } else {
+      this.closeOptionsWrap()
+    }
+  }
+
+  openOptionsWrap = () => {
+    this.$optionsWrap.classList.add('active');
+    this.$btn.dataset.btn = 'open';
+  }
+
+  closeOptionsWrap = () => {
+    this.$optionsWrap.classList.remove('active');
+    this.$btn.dataset.btn = 'close';
+  }
+
+  changeOption = ($el) => {
+
+    const $tab = this.$optionsList[$el.dataset.tab];
+    const title = $tab.innerHTML;
+    const link = $tab.dataset.link;
+    if (title === this.$btn.innerHTML) {
+      this.closeOptionsWrap();
+      return;
+    }
+    this.$btn.innerHTML = title;
+    this.$link.href = link;
+    this.closeOptionsWrap();
+    popularGoodsSwitch.changeTab($el);
+  };
+
+  clickHandler = (e) => {
+    if (e.target.closest('[data-tab]')) {
+      this.changeOption(e.target)
+    }
+  }
+
+  listeners = () => {
+    this.$btn.addEventListener('click', this.toggleOptionWrap);
+    this.$optionsWrap.addEventListener('click', this.clickHandler)
+  }
+
+}
+
 
 const debaunce = new Debaunce();
 const server = new Server();
@@ -744,6 +856,8 @@ const callbackModal = new ModalWithForm('#callback__popup', '#callback__form');
 const callbackModalSucsses = new Modal('#thanks__callback__popup');
 const catalogList = new CatalogList('#catalogList');
 const search = new Search('#searchProduct');
+const popularGoodsSwitch = new СontentSwitch('#popularGoods');
+const contentSwitchSelect = new СontentSwitchSelect('#popularSelect');
 
 
 
