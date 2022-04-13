@@ -1028,18 +1028,7 @@ h3 {
   flex-wrap: nowrap;
   position: relative;
   margin: 0 7px;
-}
-
-.search__wrap .search__form .search__form__sub__item .favorite input,
-.search__wrap .search__form .search__form__sub__item .add__cart input {
-  position: absolute;
-  opacity: 0;
-  z-index: 2;
   cursor: pointer;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
 }
 
 .search__wrap .search__form .search__form__sub__item .favorite svg path,
@@ -1047,8 +1036,8 @@ h3 {
   transition: 0.3s;
 }
 
-.search__wrap .search__form .search__form__sub__item .favorite input:checked + svg path,
-.search__wrap .search__form .search__form__sub__item .add__cart input:checked + svg path {
+.search__wrap .search__form .search__form__sub__item .favorite.active path,
+.search__wrap .search__form .search__form__sub__item .add__cart.active path {
   fill: #fff;
 }
 
@@ -1627,18 +1616,7 @@ h3 {
   justify-content: center;
   flex-wrap: nowrap;
   position: relative;
-}
-
-.popular__goods__item .bottom .favorite input,
-.popular__goods__item .bottom .add__cart input {
-  position: absolute;
-  opacity: 0;
-  z-index: 2;
   cursor: pointer;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
 }
 
 .popular__goods__item .bottom .favorite svg path,
@@ -1646,8 +1624,8 @@ h3 {
   transition: 0.3s;
 }
 
-.popular__goods__item .bottom .favorite input:checked + svg path,
-.popular__goods__item .bottom .add__cart input:checked + svg path {
+.popular__goods__item .bottom .favorite.active svg path,
+.popular__goods__item .bottom .add__cart.active svg path {
   fill: #fff;
 }
 
