@@ -4320,8 +4320,8 @@ h3 {
   }
 }
 
-.product__added.closed {
-  display: none;
+.product__added.open {
+  display: block;
 }
 
 .product__added .title {
@@ -4393,6 +4393,7 @@ h3 {
   border: 0.5px solid #ffffff;
   height: 40px;
   padding: 5px 8px;
+  cursor: pointer;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -4433,6 +4434,7 @@ h3 {
 }
 
 .product__added .close {
+  cursor: pointer;
   position: absolute;
   right: 20px;
   top: 20px;

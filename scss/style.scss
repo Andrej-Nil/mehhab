@@ -3158,8 +3158,8 @@ h3 {
   @media (max-width: 450px) {
     width: 280px;
   }
-  &.closed {
-    display: none;
+  &.open {
+    display: block;
   }
   .title {
     font-weight: 600;
@@ -3207,6 +3207,7 @@ h3 {
       border: 0.5px solid #ffffff;
       height: 40px;
       padding: 5px 8px;
+      cursor: pointer;
       @include flex(center, center);
       flex-grow: 1;
       margin-right: 20px;
@@ -3232,6 +3233,7 @@ h3 {
     }
   }
   .close {
+    cursor: pointer;
     position: absolute;
     right: 20px;
     top: 20px;

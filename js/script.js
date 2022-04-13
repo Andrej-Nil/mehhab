@@ -52,14 +52,6 @@ jQuery(document).ready(function ($) {
     $('.' + dataTab).addClass('active');
   });
 
-  //$(document).click(function (e) { // событие клика по веб-документу
-  //  var div = $(".search__form"); // тут указываем ID элемента
-  //  if (!div.is(e.target) // если клик был не по нашему блоку
-  //    && div.has(e.target).length === 0) { // и не по его дочерним элементам
-  //    $('.search__form').removeClass('open');
-  //  }
-  //});
-
   $('.popular__goods__content .see__all').click(function (e) {
     e.preventDefault();
     $(this).closest('.popular__goods__content').addClass('open');
@@ -88,10 +80,5 @@ jQuery(document).ready(function ($) {
     thumbs: {
       swiper: big__slider__nav
     },
-  });
-
-  $('.product__added .close').click(function (e) {
-    e.preventDefault();
-    $('.product__added').addClass('closed');
   });
 });

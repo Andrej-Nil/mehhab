@@ -38,6 +38,7 @@ class Server {
     this.menuApi = '../json/sidebar.json';
     this.searchApi = '../json/search.json';
     this.addFavoriteApi = '../json/addFavorite.json';
+    this.addBasketApi = '../json/addBasket.json';
     this.dataCreator = new DataCreator();
   }
 
@@ -49,17 +50,22 @@ class Server {
 
   getMenuList = async (id) => {
     const data = this.dataCreator.createFormData({ id });
-    return this.getResponse(this.POST, data, this.menuApi);
+    return await this.getResponse(this.POST, data, this.menuApi);
   }
 
   getSearchPropuct = async (value) => {
     const data = this.dataCreator.createFormData({ value });
-    return this.getResponse(this.POST, data, this.searchApi);
+    return await this.getResponse(this.POST, data, this.searchApi);
   }
 
-  addFavorite = (productId) => {
+  addFavorite = async (productId) => {
     const data = this.dataCreator.createFormData({ productId });
-    return this.getResponse(this.POST, data, this.addFavoriteApi);
+    return await this.getResponse(this.POST, data, this.addFavoriteApi);
+  }
+
+  addBasket = async (productId) => {
+    const data = this.dataCreator.createFormData({ productId });
+    return await this.getResponse(this.POST, data, this.addBasketApi);
   }
 
   getResponse = async (method, data, api) => {
@@ -199,7 +205,7 @@ class Render {
     <div data-product="${item.id}" class="search__form__sub__item">
     <a href="${item.slug}" class="name">${item.title}</a>
     <div class="sub__item__nav">
-        <span data-basket class="${basketBtnCls}">
+        <span data-add="basket" class="${basketBtnCls}">
             <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -207,7 +213,7 @@ class Render {
                     stroke="white" stroke-width="2" />
             </svg>
         </span>
-        <span data-favorite-btn class="${favoriteBtnCls}">
+        <span data-add="favorite" class="${favoriteBtnCls}">
             <svg width="26" height="23" viewBox="0 0 26 23" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -525,6 +531,57 @@ class FastOrderModal extends ModalWithForm {
   }
   listeners = () => {
     document.addEventListener('click', this.clickHandler);
+  }
+}
+
+class ModalInfo {
+  constructor(id) {
+    this.$modal = document.querySelector(id)
+    this.init()
+  }
+
+  init = () => {
+    if (!this.$modal) return;
+
+    this.$title = this.$modal.querySelector('[data-title]');
+    this.$img = this.$modal.querySelector('[data-img]');
+    this.$continueBtn = this.$modal.querySelector('[data-continue]');
+    this.timeout;
+    this.listeners()
+  }
+
+
+  open = (data) => {
+    this.setInfoAbourProduct(data);
+    this.$modal.classList.add('open');
+    this.autoClose()
+  }
+
+  close = () => {
+    this.$modal.classList.remove('open');
+    clearTimeout(this.timeout)
+  }
+
+  autoClose = () => {
+    clearTimeout(this.timeout)
+    this.timeout = setTimeout(() => {
+      this.close();
+    }, 10000)
+  }
+
+  setInfoAbourProduct = (data) => {
+    this.$img.src = data.photo;
+    this.$title.innerHTML = data.title
+  }
+
+  clickHandler = (e) => {
+    if (e.target.closest('.close') || e.target.closest('[data-continue]')) {
+      this.close();
+    }
+  }
+
+  listeners = () => {
+    this.$modal.addEventListener('click', this.clickHandler)
   }
 }
 
@@ -900,13 +957,38 @@ class ProductCard {
   }
 
 
-  addFavorite = async ($btn) => {
+  addHandler = async ($btn) => {
     const productId = $btn.closest('[data-product]').dataset.product;
-    const response = await server.addFavorite(productId);
 
-    this.resultHandler($btn, response);
+    if ($btn.dataset.add == "favorite") {
+      this.addFavorite(productId, $btn);
+    }
+
+    if ($btn.dataset.add == "basket") {
+      this.addBasket(productId, $btn);
+    }
   }
 
+  addFavorite = async (productId, $btn) => {
+    const response = await server.addFavorite(productId);
+    this.resultHandler($btn, response, this.succesAddFavorite);
+  }
+
+  addBasket = async (productId, $btn) => {
+    const response = await server.addBasket(productId);
+    this.resultHandler($btn, response, this.succesAddBasket);
+
+  }
+
+
+  succesAddFavorite = ($btn, response) => {
+    this.toggleIcon($btn, response.toggle);
+  }
+
+  succesAddBasket = ($btn, response) => {
+    this.toggleIcon($btn, response.toggle);
+    modalInfo.open(response.content[0]);
+  }
   toggleIcon = ($btn, toggle) => {
     if (toggle == true) {
       this.setActiveClass($btn);
@@ -924,7 +1006,7 @@ class ProductCard {
   }
 
 
-  resultHandler = ($btn, response) => {
+  resultHandler = ($btn, response, succsesFn) => {
     if (!response) return;
 
     if (response.status) {
@@ -933,15 +1015,15 @@ class ProductCard {
       console.log(`ошибка: ${response.error.id}`);
       return;
     } else {
-      this.toggleIcon($btn, response.toggle);
+      succsesFn($btn, response);
     }
   }
 
 
   inputHandler = (e) => {
-    if (e.target.closest('[data-favorite-btn]')) {
-      const $btn = e.target.closest('[data-favorite-btn]');
-      this.addFavorite($btn);
+    if (e.target.closest('[data-add]')) {
+      const $btn = e.target.closest('[data-add]');
+      this.addHandler($btn);
     }
   }
 
@@ -949,6 +1031,8 @@ class ProductCard {
     document.addEventListener('click', this.inputHandler);
   }
 }
+
+
 
 const debaunce = new Debaunce();
 const server = new Server();
@@ -961,6 +1045,8 @@ const callbackModalSucsses = new Modal('#thanks__callback__popup');
 
 const fastOrderModal = new FastOrderModal('#fastbay__popup', '#fastbay__form');
 const fastOrdekModalSucsses = new Modal('#thanks__fastbay__popup');
+
+const modalInfo = new ModalInfo('#modalInfo');
 
 
 const catalogList = new CatalogList('#catalogList');
