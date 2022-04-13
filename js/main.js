@@ -386,7 +386,6 @@ class Message {
 class Modal {
   constructor(id) {
     this.$modal = document.querySelector(id);
-    this.id = id
     this.init();
   }
 
@@ -396,10 +395,7 @@ class Modal {
     this.listener();
   }
 
-  open = (e) => {
-    if (!e.target.closest(`[data-id="${this.id}"]`)) {
-      return;
-    }
+  open = () => {
     this.$modal.classList.add('open');
     this.$modal.classList.add('hiding');
     body.classList.add('no-scroll');
@@ -422,7 +418,7 @@ class Modal {
 
   listener = () => {
     this.$modal.addEventListener('click', this.clickHandler);
-    document.addEventListener('click', this.open)
+    //document.addEventListener('click', this.open)
 
   }
 }
@@ -439,7 +435,6 @@ class ModalWithForm extends Modal {
     this.$submitBtn = this.$modal.querySelector('[type="button"]');
     this.$message = this.$modal.querySelector('[data-message]');
     this.response = null;
-
   }
 
   sendForm = async () => {
@@ -481,6 +476,51 @@ class ModalWithForm extends Modal {
   listener = () => {
     this.$submitBtn.addEventListener('click', this.sendForm);
     this.$modal.addEventListener('click', this.clickHandler);
+  }
+}
+
+class CallbackModal extends ModalWithForm {
+  constructor(id, formId) {
+    super(id, formId)
+    this.init()
+  }
+  init = () => {
+    this.listeners()
+  }
+
+  clickHandler = (e) => {
+    if (e.target.closest('[data-callback-btn]')) {
+      this.open();
+    }
+  }
+  listeners = () => {
+    document.addEventListener('click', this.clickHandler);
+  }
+}
+
+class FastOrderModal extends ModalWithForm {
+  constructor(id, formId) {
+    super(id, formId)
+    this.init()
+  }
+  init = () => {
+    this.$inputId = this.$modal.querySelector('[name="id"]');
+    this.listeners()
+  }
+
+  openFastOrder = (target) => {
+    const id = target.closest('[data-product]').dataset.product;
+    this.$inputId.value = id;
+    this.open();
+  }
+
+  clickHandler = (e) => {
+    if (e.target.closest('[data-fast-btn]')) {
+      this.openFastOrder(e.target);
+    }
+  }
+  listeners = () => {
+    document.addEventListener('click', this.clickHandler);
   }
 }
 
@@ -846,14 +886,23 @@ class СontentSwitchSelect {
 }
 
 
+
+
+
+
 const debaunce = new Debaunce();
 const server = new Server();
 const message = new Message();
 const wordEndingsInstaller = new WordEndingsInstaller()
 const render = new Render();
 const sidebarMenu = new SidebarMenu();
-const callbackModal = new ModalWithForm('#callback__popup', '#callback__form');
+const callbackModal = new CallbackModal('#callback__popup', '#callback__form');
 const callbackModalSucsses = new Modal('#thanks__callback__popup');
+
+const fastOrderModal = new FastOrderModal('#fastbay__popup', '#fastbay__form');
+const fastOrdekModalSucsses = new Modal('#thanks__fastbay__popup');
+
+
 const catalogList = new CatalogList('#catalogList');
 const search = new Search('#searchProduct');
 const popularGoodsSwitch = new СontentSwitch('#popularGoods');
