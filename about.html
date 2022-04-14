@@ -127,51 +127,9 @@
 
     <main class="main main__page">
         <div class="sidebar__wrap">
-            <div class="sidebar">
-                <ul class="sidebar__list">
-                    <li><a href="#">Латунный прокат</a></li>
-                    <li><a href="#">Бронзовый прокат</a></li>
-                    <li class="active"><a href="#">Алюминиевый прокат <img src="img/arr-bottom.svg" alt=""
-                                class="arr"></a>
-                        <ul class="sidebar__list__sub">
-                            <li><a href="#">Свинец</a></li>
-                            <li><a href="#">Металлы и сплавы</a></li>
-                            <li><a href="#">Прием лома</a></li>
-                            <li><a href="#">Порошок металлический</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Титановый прокат</a></li>
-                    <li><a href="#">Свинец</a></li>
-                    <li><a href="#">Металлы и сплавы</a></li>
-                    <li><a href="#">Прием лома</a></li>
-                    <li><a href="#">Порошок металлический</a></li>
-                    <li><a href="#">Нихром</a></li>
-                    <li><a href="#">Фехраль</a></li>
-                    <li><a href="#">Канат стальной</a></li>
-                    <li><a href="#">Стальной прокат</a></li>
-                    <li><a href="#">Резервуары и емкости стальные</a></li>
-                    <li><a href="#">Барьерные ограждения</a></li>
-                    <li><a href="#">Дорожные знаки</a></li>
-                    <li><a href="#">Опоры, мачты освещения</a></li>
-                    <li><a href="#">Трубы гофрированные</a></li>
-                    <li><a href="#">Сваи</a></li>
-                    <li><a href="#">Быстровозводимые конструкции</a></li>
-                    <li><a href="#">Шумозащитные экраны</a></li>
-                    <li><a href="#">Трубный прокат</a></li>
-                    <li><a href="#">Услуги</a></li>
-                    <li><a href="#">Производство</a></li>
-                    <li><a href="#">Асбестоцементные изделия</a></li>
-                    <li><a href="#">Ферросплавы</a></li>
-                    <li><a href="#">Литье из цветных сплавов</a></li>
-                    <li><a href="#">Абразивные материалы</a></li>
-                    <li><a href="#">Аноды, катоды</a></li>
-                    <li><a href="#">Лигатура и сплавы металлов</a></li>
-                    <li><a href="#">Люки чугунные, дождеприемники</a></li>
-                    <li><a href="#">Оловянный прокат</a></li>
-                    <li><a href="#">Оцинкованный прокат</a></li>
-                    <li><a href="#">Проволока</a></li>
-                    <li><a href="#">Химия промышленная</a></li>
-                    <li><a href="#">Цепи</a></li>
+            <div id="sidebarMenu" data-id="0" class="sidebar">
+                <span data-message class="message sidebar__message"></span>
+                <ul id="sidebarList" class="sidebar__list">
                 </ul>
             </div>
         </div>
@@ -318,7 +276,7 @@
                         <input data-input type="text" name="name" id="" placeholder="Имя">
                         <input data-input type="tel" name="tel" id="" placeholder="Телефон">
                         <button type="button">Заказать звонок</button>
-                        <label for="" class="check__agree">
+                        <label data-checkbox class="check__agree">
                             <input type="checkbox" name="consent" checked>
                             <span class="check"><img src="img/check2.svg" alt=""></span>
                             <span class="text">Даю согласие на обработку персональных данных</span>
@@ -367,7 +325,7 @@
                         <input data-input type="text" name="name" placeholder="Имя">
                         <input data-input type="tel" name="tel" placeholder="Телефон">
                         <button type="button">Отправить заявку</button>
-                        <label for="" class="check__agree">
+                        <label data-checkbox class="check__agree">
                             <input type="checkbox" name="consent" checked>
                             <span class="check"><img src="img/check2.svg" alt=""></span>
                             <span class="text">Даю согласие на обработку персональных данных</span>

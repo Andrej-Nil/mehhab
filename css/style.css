@@ -3386,91 +3386,6 @@ h3 {
   }
 }
 
-.checkout__bock .basket__form {
-  width: 100%;
-  background: #424242;
-  border: 0.5px solid #777777;
-  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.15);
-  padding: 50px;
-}
-
-@media (max-width: 750px) {
-  .checkout__bock .basket__form {
-    padding: 30px;
-  }
-}
-
-@media (max-width: 500px) {
-  .checkout__bock .basket__form {
-    padding: 10px 10px 20px;
-  }
-}
-
-.checkout__bock .basket__form > button {
-  width: 300px;
-  height: 50px;
-  max-width: 100%;
-  background: #d20018;
-  font-size: 18px;
-  line-height: 130%;
-  text-align: center;
-  color: #ffffff;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: nowrap;
-  margin: 0 auto 30px;
-}
-
-.checkout__bock .basket__form .personal {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: center;
-  flex-wrap: nowrap;
-  max-width: 231px;
-  margin: 0 auto;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 110%;
-  color: #ffffff;
-}
-
-.checkout__bock .basket__form .personal label {
-  width: 20px;
-  min-width: 20px;
-  height: 20px;
-  background: #d20018;
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: nowrap;
-  margin-right: 20px;
-}
-
-.checkout__bock .basket__form .personal label input {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  opacity: 0;
-  z-index: 4;
-}
-
-.checkout__bock .basket__form .personal label img {
-  transition: 0.3s;
-  opacity: 0;
-}
-
-.checkout__bock .basket__form .personal label input:checked + img {
-  opacity: 1;
-}
-
 .checkout__bock .inp__block {
   width: 100%;
   display: flex;
@@ -3533,6 +3448,10 @@ h3 {
   }
 }
 
+.checkout__bock .inp__block .inputs input.error {
+  border: 1px solid #d20018;
+}
+
 .checkout__bock .inp__block .inputs textarea {
   width: 100%;
   height: 100px;
@@ -3551,6 +3470,134 @@ h3 {
   .checkout__bock .inp__block .inputs textarea {
     font-size: 15px;
   }
+}
+
+.basket__form {
+  position: relative;
+  width: 100%;
+  background: #424242;
+  border: 0.5px solid #777777;
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.15);
+  padding: 50px;
+}
+
+@media (max-width: 750px) {
+  .basket__form {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 500px) {
+  .basket__form {
+    padding: 10px 10px 20px;
+  }
+}
+
+.basket__form > button {
+  width: 300px;
+  height: 50px;
+  max-width: 100%;
+  background: #d20018;
+  font-size: 18px;
+  line-height: 130%;
+  text-align: center;
+  color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  margin: 0 auto 30px;
+}
+
+.basket__form .personal {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: nowrap;
+  max-width: 231px;
+  margin: 0 auto;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 110%;
+  color: #ffffff;
+}
+
+.basket__form .personal label {
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+  background: #d20018;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  margin-right: 20px;
+}
+
+.basket__form .personal label input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  opacity: 0;
+  z-index: 4;
+}
+
+.basket__form .personal label img {
+  transition: 0.3s;
+  opacity: 0;
+}
+
+.basket__form .personal label input:checked + img {
+  opacity: 1;
+}
+
+.basket-empty {
+  color: #fff;
+  text-align: center;
+  margin: 150px 0 100px 0;
+}
+
+.basket-empty__text {
+  font-size: 36px;
+  line-height: 44px;
+  margin-bottom: 70px;
+}
+
+.basket-empty__bottom {
+  display: flex;
+  justify-content: center;
+}
+
+.basket-empty__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 50px;
+  background: #d20018;
+  font-size: 18px;
+  line-height: 130%;
+  color: #ffffff;
+  margin-right: 50px;
+}
+
+.basket-empty__link:last-child {
+  margin-right: 0;
+}
+
+.basket-form__message {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: #000;
+  background: #fff;
 }
 
 .basket__block {

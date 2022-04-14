@@ -1,422 +1,517 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,  maximum-scale=1">
-    <meta name="format-detection" content="telephone=no">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="fonts/stylesheet.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
-    <link rel="stylesheet" href="css/swiper.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Mehhab</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,  maximum-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="csrf-token" content="JJngsMJc1hCWMXzt5MbQGzzWx3O16VHkZLKKeE8m">
+  <link rel="stylesheet" href="fonts/stylesheet.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="css/swiper.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Mehhab</title>
 
 </head>
+
 <body>
-
-
-
-    <header class="header">
-        <div class="header__top">
-           <div class="container">
-               <div class="header__top__wrap">
-                <a href="#" class="logo">
-                    <img src="img/logo.svg" alt="">
-                </a>
-                <form action="#" class="header__search">
-                    <input type="text" name="" id="" placeholder="Введите название">
-                    <button>Поиск</button>
-                </form>
-                <div class="header__contacts">
-                    <a href="#" class="popup"><img src="img/tel.svg" alt=""></a>
-                    <div class="text">
-                        <a href="tel:+7(421)292-97-86" class="tel">+7 (421) 292-97-86</a>
-                        <a href="mailto:hab@metall-as.ru" class="mail">hab@metall-as.ru</a>
-                    </div>
-                </div>
-                <div class="mobile__nav">
-                    <a href="#" class="add__cart">
-                        <svg width="31" height="29" viewBox="0 0 31 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18.7071 17.4286C19.6714 17.4286 20.52 16.9014 20.9571 16.1043L25.56 7.76001C26.0357 6.91144 25.4186 5.85715 24.4414 5.85715H5.41286L4.20429 3.28572H0V5.85715H2.57143L7.2 15.6157L5.46429 18.7529C4.52571 20.4757 5.76 22.5714 7.71429 22.5714H23.1429V20H7.71429L9.12857 17.4286H18.7071ZM6.63429 8.42858H22.2557L18.7071 14.8571H9.68143L6.63429 8.42858ZM7.71429 23.8571C6.3 23.8571 5.15571 25.0143 5.15571 26.4286C5.15571 27.8429 6.3 29 7.71429 29C9.12857 29 10.2857 27.8429 10.2857 26.4286C10.2857 25.0143 9.12857 23.8571 7.71429 23.8571ZM20.5714 23.8571C19.1571 23.8571 18.0129 25.0143 18.0129 26.4286C18.0129 27.8429 19.1571 29 20.5714 29C21.9857 29 23.1429 27.8429 23.1429 26.4286C23.1429 25.0143 21.9857 23.8571 20.5714 23.8571Z" fill="#262626"/>
-                        <circle cx="25.0714" cy="5.21429" r="4.21429" fill="#D2001A" stroke="white" stroke-width="2"/>
-                        </svg></a>
-                    <a href="#" class="favorite">
-                        <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M17.6858 5C15.5978 5 13.5938 5.92698 12.2858 7.39183C10.9778 5.92698 8.97377 5 6.88577 5C3.18977 5 0.285767 7.76948 0.285767 11.2943C0.285767 15.6202 4.36577 19.145 10.5458 24.5008L12.2858 26L14.0258 24.4894C20.2058 19.145 24.2858 15.6202 24.2858 11.2943C24.2858 7.76948 21.3818 5 17.6858 5ZM12.4058 22.7956L12.2858 22.9101L12.1658 22.7956C6.45377 17.8632 2.68577 14.6016 2.68577 11.2943C2.68577 9.00545 4.48577 7.28883 6.88577 7.28883C8.73377 7.28883 10.5338 8.4218 11.1698 9.98965H13.4138C14.0378 8.4218 15.8378 7.28883 17.6858 7.28883C20.0858 7.28883 21.8858 9.00545 21.8858 11.2943C21.8858 14.6016 18.1178 17.8632 12.4058 22.7956Z" fill="#262626"/>
-                            <circle cx="21.5001" cy="5.21429" r="4.21429" fill="#D2001A" stroke="white" stroke-width="2"/>
-                            </svg>                                
-                    </a>
-                    <button class="burg">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                   </div>
-               </div>
-           </div>
-        </div>
-        <div class="mobile__menu">
-            <div class="container">
-                <div class="mobile__menu__wrap">
-                    <ul class="mobile__list">
-                        <li>Главная</li>
-                        <li>Новости</li>
-                        <li>Каталог</li>
-                        <li>О компании</li>
-                        <li>Контакты</li>
-                        <li>Авторизация</li>
-                    </ul>
-                    <div class="bottom">
-                        <a href="">+7 (421) 292-97-86</a>
-                        <a href="">hab@metall-as.ru</a>
-                    </div>
-                </div>
+  <header class="header">
+    <div class="header__top">
+      <div class="container">
+        <div class="header__top__wrap">
+          <a href="#" class="logo">
+            <img src="img/logo.svg" alt="">
+          </a>
+          <form action="#" class="header__search">
+            <input type="text" name="" id="" placeholder="Введите название">
+            <button type="submit">Поиск</button>
+          </form>
+          <div class="header__contacts">
+            <span data-callback-btn class="popup"><img src="img/tel.svg" alt=""></span>
+            <div class="text">
+              <a href="tel:+7(421)292-97-86" class="tel">+7 (421) 292-97-86</a>
+              <a href="mailto:hab@metall-as.ru" class="mail">hab@metall-as.ru</a>
             </div>
+          </div>
+          <div class="mobile__nav">
+            <a href="basket.html" class="add__cart">
+              <svg width="31" height="29" viewBox="0 0 31 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M18.7071 17.4286C19.6714 17.4286 20.52 16.9014 20.9571 16.1043L25.56 7.76001C26.0357 6.91144 25.4186 5.85715 24.4414 5.85715H5.41286L4.20429 3.28572H0V5.85715H2.57143L7.2 15.6157L5.46429 18.7529C4.52571 20.4757 5.76 22.5714 7.71429 22.5714H23.1429V20H7.71429L9.12857 17.4286H18.7071ZM6.63429 8.42858H22.2557L18.7071 14.8571H9.68143L6.63429 8.42858ZM7.71429 23.8571C6.3 23.8571 5.15571 25.0143 5.15571 26.4286C5.15571 27.8429 6.3 29 7.71429 29C9.12857 29 10.2857 27.8429 10.2857 26.4286C10.2857 25.0143 9.12857 23.8571 7.71429 23.8571ZM20.5714 23.8571C19.1571 23.8571 18.0129 25.0143 18.0129 26.4286C18.0129 27.8429 19.1571 29 20.5714 29C21.9857 29 23.1429 27.8429 23.1429 26.4286C23.1429 25.0143 21.9857 23.8571 20.5714 23.8571Z"
+                  fill="#262626" />
+                <circle cx="25.0714" cy="5.21429" r="4.21429" fill="#D2001A" stroke="white" stroke-width="2" />
+              </svg></a>
+            <a href="favorite.html" class="favorite">
+              <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.6858 5C15.5978 5 13.5938 5.92698 12.2858 7.39183C10.9778 5.92698 8.97377 5 6.88577 5C3.18977 5 0.285767 7.76948 0.285767 11.2943C0.285767 15.6202 4.36577 19.145 10.5458 24.5008L12.2858 26L14.0258 24.4894C20.2058 19.145 24.2858 15.6202 24.2858 11.2943C24.2858 7.76948 21.3818 5 17.6858 5ZM12.4058 22.7956L12.2858 22.9101L12.1658 22.7956C6.45377 17.8632 2.68577 14.6016 2.68577 11.2943C2.68577 9.00545 4.48577 7.28883 6.88577 7.28883C8.73377 7.28883 10.5338 8.4218 11.1698 9.98965H13.4138C14.0378 8.4218 15.8378 7.28883 17.6858 7.28883C20.0858 7.28883 21.8858 9.00545 21.8858 11.2943C21.8858 14.6016 18.1178 17.8632 12.4058 22.7956Z"
+                  fill="#262626" />
+                <circle cx="21.5001" cy="5.21429" r="4.21429" fill="#D2001A" stroke="white" stroke-width="2" />
+              </svg>
+            </a>
+
+
+            <button class="burg">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
         </div>
-        <div class="header__bottom">
-            <div class="container">
-                <div class="header__bottom__wrap">
-                    <ul class="header__list">
-                        <li class="active"><a href="#">Главная</a></li>
-                        <li><a href="#">Новости</a></li>
-                        <li><a href="#">Каталог</a></li>
-                        <li><a href="#">О компании</a></li>
-                        <li><a href="#">Контакты</a></li>
-                        <li><a href="#">Авторизация</a></li>
-                    </ul>
-                    <div class="header__icons">
-                        <a href="#">
-                            <svg width="31" height="29" viewBox="0 0 31 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M18.7071 17.4286C19.6714 17.4286 20.52 16.9014 20.9571 16.1043L25.56 7.76001C26.0357 6.91144 25.4186 5.85715 24.4414 5.85715H5.41286L4.20429 3.28572H0V5.85715H2.57143L7.2 15.6157L5.46429 18.7529C4.52571 20.4757 5.76 22.5714 7.71429 22.5714H23.1429V20H7.71429L9.12857 17.4286H18.7071ZM6.63429 8.42858H22.2557L18.7071 14.8571H9.68143L6.63429 8.42858ZM7.71429 23.8571C6.3 23.8571 5.15571 25.0143 5.15571 26.4286C5.15571 27.8429 6.3 29 7.71429 29C9.12857 29 10.2857 27.8429 10.2857 26.4286C10.2857 25.0143 9.12857 23.8571 7.71429 23.8571ZM20.5714 23.8571C19.1571 23.8571 18.0129 25.0143 18.0129 26.4286C18.0129 27.8429 19.1571 29 20.5714 29C21.9857 29 23.1429 27.8429 23.1429 26.4286C23.1429 25.0143 21.9857 23.8571 20.5714 23.8571Z" fill="#262626"/>
-                            <circle cx="25.0714" cy="5.21429" r="4.21429" fill="#D2001A" stroke="white" stroke-width="2"/>
-                            </svg></a>
-                        <a href="#">
-                            <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M17.6858 5C15.5978 5 13.5938 5.92698 12.2858 7.39183C10.9778 5.92698 8.97377 5 6.88577 5C3.18977 5 0.285767 7.76948 0.285767 11.2943C0.285767 15.6202 4.36577 19.145 10.5458 24.5008L12.2858 26L14.0258 24.4894C20.2058 19.145 24.2858 15.6202 24.2858 11.2943C24.2858 7.76948 21.3818 5 17.6858 5ZM12.4058 22.7956L12.2858 22.9101L12.1658 22.7956C6.45377 17.8632 2.68577 14.6016 2.68577 11.2943C2.68577 9.00545 4.48577 7.28883 6.88577 7.28883C8.73377 7.28883 10.5338 8.4218 11.1698 9.98965H13.4138C14.0378 8.4218 15.8378 7.28883 17.6858 7.28883C20.0858 7.28883 21.8858 9.00545 21.8858 11.2943C21.8858 14.6016 18.1178 17.8632 12.4058 22.7956Z" fill="#262626"/>
-                                <circle cx="21.5001" cy="5.21429" r="4.21429" fill="#D2001A" stroke="white" stroke-width="2"/>
-                                </svg>                                
-                        </a>
+      </div>
+    </div>
+    <div class="mobile__menu">
+      <div class="container">
+        <div class="mobile__menu__wrap">
+          <ul class="mobile__list">
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="news.html">Новости</a></li>
+            <li><a href="catalog.html" class="">Каталог</a></li>
+            <li><a href="about.html" class="">О компании</a></li>
+            <li><a href="contacts.html" class="">Контакты</a></li>
+            <li><a href="" class="">Авторизация</a></li>
+          </ul>
+          <div class="bottom">
+            <a href="tel:+7(421)2929786">+7 (421) 292-97-86</a>
+            <a href="mailto:hab@metall-as.ru">hab@metall-as.ru</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="header__bottom">
+      <div class="container">
+        <div class="header__bottom__wrap">
+          <ul class="header__list">
+            <li class="active"><a href="index.html">Главная</a></li>
+            <li><a href="news.html">Новости</a></li>
+            <li><a href="catalog.html">Каталог</a></li>
+            <li><a href="about.html">О компании</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+            <li><a href="#!">Авторизация</a></li>
+          </ul>
+          <div class="header__icons">
+            <a href="basket.html">
+              <svg width="31" height="29" viewBox="0 0 31 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M18.7071 17.4286C19.6714 17.4286 20.52 16.9014 20.9571 16.1043L25.56 7.76001C26.0357 6.91144 25.4186 5.85715 24.4414 5.85715H5.41286L4.20429 3.28572H0V5.85715H2.57143L7.2 15.6157L5.46429 18.7529C4.52571 20.4757 5.76 22.5714 7.71429 22.5714H23.1429V20H7.71429L9.12857 17.4286H18.7071ZM6.63429 8.42858H22.2557L18.7071 14.8571H9.68143L6.63429 8.42858ZM7.71429 23.8571C6.3 23.8571 5.15571 25.0143 5.15571 26.4286C5.15571 27.8429 6.3 29 7.71429 29C9.12857 29 10.2857 27.8429 10.2857 26.4286C10.2857 25.0143 9.12857 23.8571 7.71429 23.8571ZM20.5714 23.8571C19.1571 23.8571 18.0129 25.0143 18.0129 26.4286C18.0129 27.8429 19.1571 29 20.5714 29C21.9857 29 23.1429 27.8429 23.1429 26.4286C23.1429 25.0143 21.9857 23.8571 20.5714 23.8571Z"
+                  fill="#262626" />
+                <circle cx="25.0714" cy="5.21429" r="4.21429" fill="#D2001A" stroke="white" stroke-width="2" />
+              </svg></a>
+            <a href="favorite.html">
+              <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.6858 5C15.5978 5 13.5938 5.92698 12.2858 7.39183C10.9778 5.92698 8.97377 5 6.88577 5C3.18977 5 0.285767 7.76948 0.285767 11.2943C0.285767 15.6202 4.36577 19.145 10.5458 24.5008L12.2858 26L14.0258 24.4894C20.2058 19.145 24.2858 15.6202 24.2858 11.2943C24.2858 7.76948 21.3818 5 17.6858 5ZM12.4058 22.7956L12.2858 22.9101L12.1658 22.7956C6.45377 17.8632 2.68577 14.6016 2.68577 11.2943C2.68577 9.00545 4.48577 7.28883 6.88577 7.28883C8.73377 7.28883 10.5338 8.4218 11.1698 9.98965H13.4138C14.0378 8.4218 15.8378 7.28883 17.6858 7.28883C20.0858 7.28883 21.8858 9.00545 21.8858 11.2943C21.8858 14.6016 18.1178 17.8632 12.4058 22.7956Z"
+                  fill="#262626" />
+                <circle cx="21.5001" cy="5.21429" r="4.21429" fill="#D2001A" stroke="white" stroke-width="2" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main main__page">
+    <div class="sidebar__wrap">
+      <div id="sidebarMenu" data-id="0" class="sidebar">
+        <span data-message class="message sidebar__message"></span>
+        <ul id="sidebarList" class="sidebar__list">
+        </ul>
+      </div>
+    </div>
+    <div class="page__content">
+      <div class="container">
+        <div class="page__content__wrap">
+          <ul class="breadcrumbs">
+            <li><a href="#">Главная</a></li>
+            <li><a href="#">Корзина</a></li>
+          </ul>
+          <h2>Корзина</h2>
+          <div id="basketContent" class="basket">
+            <div class="basket__block">
+
+              <div class="basket__block__wrap">
+                <div class="basket__block__wrap__hidden">
+                  <div class="basket__item__row">
+                    <div class="info">
+                      <a href="#" class="name">Лист нержавеющий 406х3 мм 12Х18Н9
+                        ГОСТ 5632-72</a>
+                      <span class="cost">9908800 ₽</span>
                     </div>
+                    <div class="basket__item__row__nav">
+                      <form action="#" class="order__form">
+                        <button type="button">-</button>
+                        <input type="text" name="" id="" value="3000">
+                        <button type="button">+</button>
+                      </form>
+                      <label for="" class="favorite">
+                        <input type="checkbox" name="" id="">
+                        <svg width="26" height="23" viewBox="0 0 26 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M12.25 3.28161L12.9995 4.13022L13.749 3.28161C14.978 1.89016 16.8769 1 18.8495 1C22.3359 1 24.9995 3.61962 24.9995 6.89373C24.9995 8.92207 24.0626 10.847 22.1901 13.0544C20.3073 15.2738 17.5945 17.6479 14.2263 20.5927L14.2249 20.5939L12.997 21.6716L11.7735 20.6059C11.7731 20.6055 11.7727 20.6052 11.7723 20.6048C8.40445 17.654 5.69197 15.2771 3.80917 13.0562C1.93638 10.8471 0.999512 8.92209 0.999512 6.89373C0.999512 3.61962 3.66308 1 7.14951 1C9.12211 1 11.021 1.89016 12.25 3.28161Z"
+                            stroke="white" stroke-width="2" />
+                        </svg>
+                      </label>
+                      <a href="#" class="del"><img src="img/del.svg" alt=""></a>
+                    </div>
+                  </div>
+                  <div class="basket__item__row sale__product">
+                    <div class="info">
+                      <a href="#" class="name">Лист нержавеющий 406х3 мм 12Х18Н9
+                        ГОСТ 5632-72</a>
+                      <span data-sale="9908800 ₽" class="cost">9908800 ₽</span>
+                    </div>
+                    <div class="basket__item__row__nav">
+                      <form action="#" class="order__form">
+                        <button type="button">-</button>
+                        <input type="text" name="" id="" value="3000">
+                        <button type="button">+</button>
+                      </form>
+                      <label for="" class="favorite">
+                        <input type="checkbox" name="" id="">
+                        <svg width="26" height="23" viewBox="0 0 26 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M12.25 3.28161L12.9995 4.13022L13.749 3.28161C14.978 1.89016 16.8769 1 18.8495 1C22.3359 1 24.9995 3.61962 24.9995 6.89373C24.9995 8.92207 24.0626 10.847 22.1901 13.0544C20.3073 15.2738 17.5945 17.6479 14.2263 20.5927L14.2249 20.5939L12.997 21.6716L11.7735 20.6059C11.7731 20.6055 11.7727 20.6052 11.7723 20.6048C8.40445 17.654 5.69197 15.2771 3.80917 13.0562C1.93638 10.8471 0.999512 8.92209 0.999512 6.89373C0.999512 3.61962 3.66308 1 7.14951 1C9.12211 1 11.021 1.89016 12.25 3.28161Z"
+                            stroke="white" stroke-width="2" />
+                        </svg>
+                      </label>
+                      <a href="#" class="del"><img src="img/del.svg" alt=""></a>
+                    </div>
+                  </div>
+                  <div class="basket__item__row">
+                    <div class="info">
+                      <a href="#" class="name">Лист нержавеющий 406х3 мм 12Х18Н9
+                        ГОСТ 5632-72</a>
+                      <span class="cost">9908800 ₽</span>
+                    </div>
+                    <div class="basket__item__row__nav">
+                      <form action="#" class="order__form">
+                        <button type="button">-</button>
+                        <input type="text" name="" id="" value="3000">
+                        <button type="button">+</button>
+                      </form>
+                      <label for="" class="favorite">
+                        <input type="checkbox" name="" id="">
+                        <svg width="26" height="23" viewBox="0 0 26 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M12.25 3.28161L12.9995 4.13022L13.749 3.28161C14.978 1.89016 16.8769 1 18.8495 1C22.3359 1 24.9995 3.61962 24.9995 6.89373C24.9995 8.92207 24.0626 10.847 22.1901 13.0544C20.3073 15.2738 17.5945 17.6479 14.2263 20.5927L14.2249 20.5939L12.997 21.6716L11.7735 20.6059C11.7731 20.6055 11.7727 20.6052 11.7723 20.6048C8.40445 17.654 5.69197 15.2771 3.80917 13.0562C1.93638 10.8471 0.999512 8.92209 0.999512 6.89373C0.999512 3.61962 3.66308 1 7.14951 1C9.12211 1 11.021 1.89016 12.25 3.28161Z"
+                            stroke="white" stroke-width="2" />
+                        </svg>
+                      </label>
+                      <a href="#" class="del"><img src="img/del.svg" alt=""></a>
+                    </div>
+                  </div>
+                  <div class="basket__item__row">
+                    <div class="info">
+                      <a href="#" class="name">Лист нержавеющий 406х3 мм 12Х18Н9
+                        ГОСТ 5632-72</a>
+                      <span class="cost">9908800 ₽</span>
+                    </div>
+                    <div class="basket__item__row__nav">
+                      <form action="#" class="order__form">
+                        <button type="button">-</button>
+                        <input type="text" name="" id="" value="3000">
+                        <button type="button">+</button>
+                      </form>
+                      <label for="" class="favorite">
+                        <input type="checkbox" name="" id="">
+                        <svg width="26" height="23" viewBox="0 0 26 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M12.25 3.28161L12.9995 4.13022L13.749 3.28161C14.978 1.89016 16.8769 1 18.8495 1C22.3359 1 24.9995 3.61962 24.9995 6.89373C24.9995 8.92207 24.0626 10.847 22.1901 13.0544C20.3073 15.2738 17.5945 17.6479 14.2263 20.5927L14.2249 20.5939L12.997 21.6716L11.7735 20.6059C11.7731 20.6055 11.7727 20.6052 11.7723 20.6048C8.40445 17.654 5.69197 15.2771 3.80917 13.0562C1.93638 10.8471 0.999512 8.92209 0.999512 6.89373C0.999512 3.61962 3.66308 1 7.14951 1C9.12211 1 11.021 1.89016 12.25 3.28161Z"
+                            stroke="white" stroke-width="2" />
+                        </svg>
+                      </label>
+                      <a href="#" class="del"><img src="img/del.svg" alt=""></a>
+                    </div>
+                  </div>
+                  <div class="basket__item__row">
+                    <div class="info">
+                      <a href="#" class="name">Лист нержавеющий 406х3 мм 12Х18Н9
+                        ГОСТ 5632-72</a>
+                      <span class="cost">9908800 ₽</span>
+                    </div>
+                    <div class="basket__item__row__nav">
+                      <form action="#" class="order__form">
+                        <button type="button">-</button>
+                        <input type="text" name="" id="" value="3000">
+                        <button type="button">+</button>
+                      </form>
+                      <label for="" class="favorite">
+                        <input type="checkbox" name="" id="">
+                        <svg width="26" height="23" viewBox="0 0 26 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M12.25 3.28161L12.9995 4.13022L13.749 3.28161C14.978 1.89016 16.8769 1 18.8495 1C22.3359 1 24.9995 3.61962 24.9995 6.89373C24.9995 8.92207 24.0626 10.847 22.1901 13.0544C20.3073 15.2738 17.5945 17.6479 14.2263 20.5927L14.2249 20.5939L12.997 21.6716L11.7735 20.6059C11.7731 20.6055 11.7727 20.6052 11.7723 20.6048C8.40445 17.654 5.69197 15.2771 3.80917 13.0562C1.93638 10.8471 0.999512 8.92209 0.999512 6.89373C0.999512 3.61962 3.66308 1 7.14951 1C9.12211 1 11.021 1.89016 12.25 3.28161Z"
+                            stroke="white" stroke-width="2" />
+                        </svg>
+                      </label>
+                      <a href="#" class="del"><img src="img/del.svg" alt=""></a>
+                    </div>
+                  </div>
+                  <div class="basket__item__row">
+                    <div class="info">
+                      <a href="#" class="name">Лист нержавеющий 406х3 мм 12Х18Н9
+                        ГОСТ 5632-72</a>
+                      <span class="cost">9908800 ₽</span>
+                    </div>
+                    <div class="basket__item__row__nav">
+                      <form action="#" class="order__form">
+                        <button type="button">-</button>
+                        <input type="text" name="" id="" value="3000">
+                        <button type="button">+</button>
+                      </form>
+                      <label for="" class="favorite">
+                        <input type="checkbox" name="" id="">
+                        <svg width="26" height="23" viewBox="0 0 26 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M12.25 3.28161L12.9995 4.13022L13.749 3.28161C14.978 1.89016 16.8769 1 18.8495 1C22.3359 1 24.9995 3.61962 24.9995 6.89373C24.9995 8.92207 24.0626 10.847 22.1901 13.0544C20.3073 15.2738 17.5945 17.6479 14.2263 20.5927L14.2249 20.5939L12.997 21.6716L11.7735 20.6059C11.7731 20.6055 11.7727 20.6052 11.7723 20.6048C8.40445 17.654 5.69197 15.2771 3.80917 13.0562C1.93638 10.8471 0.999512 8.92209 0.999512 6.89373C0.999512 3.61962 3.66308 1 7.14951 1C9.12211 1 11.021 1.89016 12.25 3.28161Z"
+                            stroke="white" stroke-width="2" />
+                        </svg>
+                      </label>
+                      <a href="#" class="del"><img src="img/del.svg" alt=""></a>
+                    </div>
+                  </div>
                 </div>
+                <div class="cost">
+                  <span>Итого: 36000000 ₽ </span>
+                </div>
+              </div>
             </div>
+
+            <div class="checkout__bock">
+              <h2>Оформление заказа</h2>
+              <form id="basketForm" action="/json/send-form.json" class="basket__form">
+                <div class="inp__block">
+                  <span class="label">Доставка</span>
+                  <div class="inputs">
+                    <input data-input type="text" name="address"
+                      placeholder="Россия, Калининград, улица Мамаева, строение 14/8">
+                  </div>
+                </div>
+                <div class="inp__block">
+                  <span class="label">Заказчик</span>
+                  <div class="inputs">
+                    <input data-input type="text" name="name" placeholder="Имя">
+                    <input data-input type="tel" name="tel" placeholder="Телефон">
+                    <input type="email" name="email" placeholder="Электронная почта">
+                  </div>
+                </div>
+                <div class="inp__block">
+                  <span class="label">Детали</span>
+                  <div class="inputs">
+                    <textarea name="message" placeholder="Комментарий"></textarea>
+                  </div>
+                </div>
+                <button data-submit type="button">Оформить заказ</button>
+                <p data-checkbox class="personal">
+                  <label>
+                    <input type="checkbox" name="consent" checked>
+                    <img src="img/check.svg" alt="">
+                  </label>
+                  <span class="text">Даю согласие на обработку
+                    персональных данных</span>
+                </p>
+                <p data-message class="basket-form__message message"></p>
+              </form>
+            </div>
+          </div>
         </div>
-    </header>
+      </div>
+    </div>
+  </main>
 
-
-
-    <main class="main main__page">
-        <div class="sidebar__wrap">
-            <div class="sidebar">
-                <ul class="sidebar__list">
-                    <li><a href="#">Латунный прокат</a></li>
-                    <li><a href="#">Бронзовый прокат</a></li>
-                    <li class="active"><a href="#">Алюминиевый прокат <img src="img/arr-bottom.svg" alt="" class="arr"></a>
-                    <ul class="sidebar__list__sub">
-                        <li><a href="#">Свинец</a></li>
-                        <li><a href="#">Металлы и сплавы</a></li>
-                        <li><a href="#">Прием лома</a></li>
-                        <li><a href="#">Порошок металлический</a></li>
-                    </ul>
-                </li>
-                    <li><a href="#">Титановый прокат</a></li>
-                    <li><a href="#">Свинец</a></li>
-                    <li><a href="#">Металлы и сплавы</a></li>
-                    <li><a href="#">Прием лома</a></li>
-                    <li><a href="#">Порошок металлический</a></li>
-                    <li><a href="#">Нихром</a></li>
-                    <li><a href="#">Фехраль</a></li>
-                    <li><a href="#">Канат стальной</a></li>
-                    <li><a href="#">Стальной прокат</a></li>
-                    <li><a href="#">Резервуары и емкости стальные</a></li>
-                    <li><a href="#">Барьерные ограждения</a></li>
-                    <li><a href="#">Дорожные знаки</a></li>
-                    <li><a href="#">Опоры, мачты освещения</a></li>
-                    <li><a href="#">Трубы гофрированные</a></li>
-                    <li><a href="#">Сваи</a></li>
-                    <li><a href="#">Быстровозводимые конструкции</a></li>
-                    <li><a href="#">Шумозащитные экраны</a></li>
-                    <li><a href="#">Трубный прокат</a></li>
-                    <li><a href="#">Услуги</a></li>
-                    <li><a href="#">Производство</a></li>
-                    <li><a href="#">Асбестоцементные изделия</a></li>
-                    <li><a href="#">Ферросплавы</a></li>
-                    <li><a href="#">Литье из цветных сплавов</a></li>
-                    <li><a href="#">Абразивные материалы</a></li>
-                    <li><a href="#">Аноды, катоды</a></li>
-                    <li><a href="#">Лигатура и сплавы металлов</a></li>
-                    <li><a href="#">Люки чугунные, дождеприемники</a></li>
-                    <li><a href="#">Оловянный прокат</a></li>
-                    <li><a href="#">Оцинкованный прокат</a></li>
-                    <li><a href="#">Проволока</a></li>
-                    <li><a href="#">Химия промышленная</a></li>
-                    <li><a href="#">Цепи</a></li>
+  <footer class="footer">
+    <div class="footer__top">
+      <div class="container">
+        <div class="footer__top__wrap">
+          <a href="#" class="logo"><img src="img/logo.svg" alt=""></a>
+          <p>Екатеринбург, ул. Малышева 51, этаж 16 <br>
+            habarovsk@zakaz-met.ru <br>
+            8 421 279-40-96</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        <div class="footer__bottom__wrap">
+          <div class="top">
+            <div class="footer__lists">
+              <div class="footer__list">
+                <span class="label">Главная</span>
+                <ul>
+                  <li><a href="#">Популярные разделы</a></li>
+                  <li><a href="#">Преимущества</a></li>
+                  <li><a href="#">Каталог</a></li>
+                  <li><a href="#">Поиск</a></li>
                 </ul>
+              </div>
+              <div class="footer__list">
+                <span class="label">Каталог</span>
+                <ul>
+                  <li><a href="#">Металлопрокат</a></li>
+                  <li><a href="#">Металлоконструкции</a></li>
+                  <li><a href="#">Емкости и резервуары</a></li>
+                  <li><a href="#">Услуги и сервисы</a></li>
+                </ul>
+              </div>
+              <div class="footer__list">
+                <span class="label">О компании</span>
+                <ul>
+                  <li><a href="#">Информация</a></li>
+                  <li><a href="#">Новости</a></li>
+                </ul>
+              </div>
             </div>
-        </div>
-        <div class="page__content">
-            <div class="container">
-                <div class="page__content__wrap">
-                    <ul class="breadcrumbs">
-                        <li><a href="#">Главная</a></li>
-                        <li><a href="#">Корзина</a></li>
-                    </ul>
-
-
-                    <div class="basket__block">
-                        <h2>Корзина</h2>
-                        <div class="basket__block__wrap">
-                            <div class="basket__block__wrap__hidden">
-                                <div class="basket__item__row">
-                                    <div class="info">
-                                        <a href="#" class="name">Лист нержавеющий 406х3 мм 12Х18Н9
-                                            ГОСТ 5632-72</a>
-                                        <span class="cost">9908800 ₽</span>
-                                    </div>
-                                    <div class="basket__item__row__nav">
-                                        <form action="#" class="order__form">
-                                          <button type="button">-</button>
-                                            <input type="text" name="" id="" value="3000">
-                                           <button type="button">+</button>
-                                        </form>
-                                        <label for="" class="favorite">
-                                            <input type="checkbox" name="" id="">
-                                            <svg width="26" height="23" viewBox="0 0 26 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M12.25 3.28161L12.9995 4.13022L13.749 3.28161C14.978 1.89016 16.8769 1 18.8495 1C22.3359 1 24.9995 3.61962 24.9995 6.89373C24.9995 8.92207 24.0626 10.847 22.1901 13.0544C20.3073 15.2738 17.5945 17.6479 14.2263 20.5927L14.2249 20.5939L12.997 21.6716L11.7735 20.6059C11.7731 20.6055 11.7727 20.6052 11.7723 20.6048C8.40445 17.654 5.69197 15.2771 3.80917 13.0562C1.93638 10.8471 0.999512 8.92209 0.999512 6.89373C0.999512 3.61962 3.66308 1 7.14951 1C9.12211 1 11.021 1.89016 12.25 3.28161Z" stroke="white" stroke-width="2"/>
-                                            </svg>
-                                        </label>
-                                        <a href="#" class="del"><img src="img/del.svg" alt=""></a>
-                                    </div>
-                                </div>
-                                <div class="basket__item__row sale__product">
-                                    <div class="info">
-                                        <a href="#" class="name">Лист нержавеющий 406х3 мм 12Х18Н9
-                                            ГОСТ 5632-72</a>
-                                        <span data-sale="9908800 ₽" class="cost">9908800 ₽</span>
-                                    </div>
-                                    <div class="basket__item__row__nav">
-                                        <form action="#" class="order__form">
-                                          <button type="button">-</button>
-                                            <input type="text" name="" id="" value="3000">
-                                           <button type="button">+</button>
-                                        </form>
-                                        <label for="" class="favorite">
-                                            <input type="checkbox" name="" id="">
-                                            <svg width="26" height="23" viewBox="0 0 26 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M12.25 3.28161L12.9995 4.13022L13.749 3.28161C14.978 1.89016 16.8769 1 18.8495 1C22.3359 1 24.9995 3.61962 24.9995 6.89373C24.9995 8.92207 24.0626 10.847 22.1901 13.0544C20.3073 15.2738 17.5945 17.6479 14.2263 20.5927L14.2249 20.5939L12.997 21.6716L11.7735 20.6059C11.7731 20.6055 11.7727 20.6052 11.7723 20.6048C8.40445 17.654 5.69197 15.2771 3.80917 13.0562C1.93638 10.8471 0.999512 8.92209 0.999512 6.89373C0.999512 3.61962 3.66308 1 7.14951 1C9.12211 1 11.021 1.89016 12.25 3.28161Z" stroke="white" stroke-width="2"/>
-                                            </svg>
-                                        </label>
-                                        <a href="#" class="del"><img src="img/del.svg" alt=""></a>
-                                    </div>
-                                </div>
-                                <div class="basket__item__row">
-                                    <div class="info">
-                                        <a href="#" class="name">Лист нержавеющий 406х3 мм 12Х18Н9
-                                            ГОСТ 5632-72</a>
-                                        <span class="cost">9908800 ₽</span>
-                                    </div>
-                                    <div class="basket__item__row__nav">
-                                        <form action="#" class="order__form">
-                                          <button type="button">-</button>
-                                            <input type="text" name="" id="" value="3000">
-                                           <button type="button">+</button>
-                                        </form>
-                                        <label for="" class="favorite">
-                                            <input type="checkbox" name="" id="">
-                                            <svg width="26" height="23" viewBox="0 0 26 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M12.25 3.28161L12.9995 4.13022L13.749 3.28161C14.978 1.89016 16.8769 1 18.8495 1C22.3359 1 24.9995 3.61962 24.9995 6.89373C24.9995 8.92207 24.0626 10.847 22.1901 13.0544C20.3073 15.2738 17.5945 17.6479 14.2263 20.5927L14.2249 20.5939L12.997 21.6716L11.7735 20.6059C11.7731 20.6055 11.7727 20.6052 11.7723 20.6048C8.40445 17.654 5.69197 15.2771 3.80917 13.0562C1.93638 10.8471 0.999512 8.92209 0.999512 6.89373C0.999512 3.61962 3.66308 1 7.14951 1C9.12211 1 11.021 1.89016 12.25 3.28161Z" stroke="white" stroke-width="2"/>
-                                            </svg>
-                                        </label>
-                                        <a href="#" class="del"><img src="img/del.svg" alt=""></a>
-                                    </div>
-                                </div>
-                                <div class="basket__item__row">
-                                    <div class="info">
-                                        <a href="#" class="name">Лист нержавеющий 406х3 мм 12Х18Н9
-                                            ГОСТ 5632-72</a>
-                                        <span class="cost">9908800 ₽</span>
-                                    </div>
-                                    <div class="basket__item__row__nav">
-                                        <form action="#" class="order__form">
-                                          <button type="button">-</button>
-                                            <input type="text" name="" id="" value="3000">
-                                           <button type="button">+</button>
-                                        </form>
-                                        <label for="" class="favorite">
-                                            <input type="checkbox" name="" id="">
-                                            <svg width="26" height="23" viewBox="0 0 26 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M12.25 3.28161L12.9995 4.13022L13.749 3.28161C14.978 1.89016 16.8769 1 18.8495 1C22.3359 1 24.9995 3.61962 24.9995 6.89373C24.9995 8.92207 24.0626 10.847 22.1901 13.0544C20.3073 15.2738 17.5945 17.6479 14.2263 20.5927L14.2249 20.5939L12.997 21.6716L11.7735 20.6059C11.7731 20.6055 11.7727 20.6052 11.7723 20.6048C8.40445 17.654 5.69197 15.2771 3.80917 13.0562C1.93638 10.8471 0.999512 8.92209 0.999512 6.89373C0.999512 3.61962 3.66308 1 7.14951 1C9.12211 1 11.021 1.89016 12.25 3.28161Z" stroke="white" stroke-width="2"/>
-                                            </svg>
-                                        </label>
-                                        <a href="#" class="del"><img src="img/del.svg" alt=""></a>
-                                    </div>
-                                </div>
-                                <div class="basket__item__row">
-                                    <div class="info">
-                                        <a href="#" class="name">Лист нержавеющий 406х3 мм 12Х18Н9
-                                            ГОСТ 5632-72</a>
-                                        <span class="cost">9908800 ₽</span>
-                                    </div>
-                                    <div class="basket__item__row__nav">
-                                        <form action="#" class="order__form">
-                                          <button type="button">-</button>
-                                            <input type="text" name="" id="" value="3000">
-                                           <button type="button">+</button>
-                                        </form>
-                                        <label for="" class="favorite">
-                                            <input type="checkbox" name="" id="">
-                                            <svg width="26" height="23" viewBox="0 0 26 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M12.25 3.28161L12.9995 4.13022L13.749 3.28161C14.978 1.89016 16.8769 1 18.8495 1C22.3359 1 24.9995 3.61962 24.9995 6.89373C24.9995 8.92207 24.0626 10.847 22.1901 13.0544C20.3073 15.2738 17.5945 17.6479 14.2263 20.5927L14.2249 20.5939L12.997 21.6716L11.7735 20.6059C11.7731 20.6055 11.7727 20.6052 11.7723 20.6048C8.40445 17.654 5.69197 15.2771 3.80917 13.0562C1.93638 10.8471 0.999512 8.92209 0.999512 6.89373C0.999512 3.61962 3.66308 1 7.14951 1C9.12211 1 11.021 1.89016 12.25 3.28161Z" stroke="white" stroke-width="2"/>
-                                            </svg>
-                                        </label>
-                                        <a href="#" class="del"><img src="img/del.svg" alt=""></a>
-                                    </div>
-                                </div>
-                                <div class="basket__item__row">
-                                    <div class="info">
-                                        <a href="#" class="name">Лист нержавеющий 406х3 мм 12Х18Н9
-                                            ГОСТ 5632-72</a>
-                                        <span class="cost">9908800 ₽</span>
-                                    </div>
-                                    <div class="basket__item__row__nav">
-                                        <form action="#" class="order__form">
-                                          <button type="button">-</button>
-                                            <input type="text" name="" id="" value="3000">
-                                           <button type="button">+</button>
-                                        </form>
-                                        <label for="" class="favorite">
-                                            <input type="checkbox" name="" id="">
-                                            <svg width="26" height="23" viewBox="0 0 26 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M12.25 3.28161L12.9995 4.13022L13.749 3.28161C14.978 1.89016 16.8769 1 18.8495 1C22.3359 1 24.9995 3.61962 24.9995 6.89373C24.9995 8.92207 24.0626 10.847 22.1901 13.0544C20.3073 15.2738 17.5945 17.6479 14.2263 20.5927L14.2249 20.5939L12.997 21.6716L11.7735 20.6059C11.7731 20.6055 11.7727 20.6052 11.7723 20.6048C8.40445 17.654 5.69197 15.2771 3.80917 13.0562C1.93638 10.8471 0.999512 8.92209 0.999512 6.89373C0.999512 3.61962 3.66308 1 7.14951 1C9.12211 1 11.021 1.89016 12.25 3.28161Z" stroke="white" stroke-width="2"/>
-                                            </svg>
-                                        </label>
-                                        <a href="#" class="del"><img src="img/del.svg" alt=""></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="cost">
-                                <span>Итого: 36000000 ₽ </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="checkout__bock">
-                        <h2>Оформление заказа</h2>
-                        <form action="" class="basket__form">
-                            <div class="inp__block">
-                                <span class="label">Доставка</span>
-                                <div class="inputs">
-                                    <input type="text" value="Россия, Калининград, улица Мамаева, строение 14/8 ">
-                                </div>
-                            </div>
-                            <div class="inp__block">
-                                <span class="label">Заказчик</span>
-                                <div class="inputs">
-                                    <input type="text" value="Никол" placeholder="Имя">
-                                    <input type="tel" placeholder="Телефон">
-                                    <input type="email" placeholder="Электронная почта">
-                                </div>
-                            </div>
-                            <div class="inp__block">
-                                <span class="label">Детали</span>
-                                <div class="inputs">
-                                    <textarea placeholder="Комментарий"></textarea>
-                                </div>
-                            </div>
-                            <button type="submit">Оформить заказ</button>
-                            <p class="personal">
-                                <label for="">
-                                    <input type="checkbox" name="" id="">
-                                    <img src="img/check.svg" alt="">
-                                </label>
-                                <span class="text">Даю согласие на обработку
-                                    персональных данных </span>
-                            </p>
-                        </form>
-                    </div>
-                   
-                </div>
-                </div>
-                </div>
+            <div class="footer__contacts">
+              <p>Вся информация на сайте <br>
+                не является публичной <a href="#">офертой</a>.</p>
+              <a href="#" class="sup">Служба поддержки</a>
+              <div class="footer__social">
+                <a href="#"><img src="img/vk.svg" alt=""></a>
+                <a href="#"><img src="img/insta.svg" alt=""></a>
+                <a href="#"><img src="img/teleg.svg" alt=""></a>
+              </div>
             </div>
+          </div>
+          <div class="bottom">
+            <a href="#" class="assort">
+              <img src="img/assort.svg" alt="">
+            </a>
+            <p>Сайт создан на платформе <br>
+              «<a href="#">В Ассортименте</a>». Пакет: <a href="#">Business</a> <br>
+              © МеталлЭнергоХолдинг 2019 - 2021</p>
+          </div>
         </div>
-    </main>
+      </div>
+    </div>
+  </footer>
 
+  <a href="#" class="top__link">
+    <img src="img/link-top.svg" alt="">
+  </a>
 
+  <div id="modalInfo" class="product__added">
+    <span class="close"><img src="img/close.svg" alt=""></span>
+    <span class="title">Товар добавлен в корзину</span>
+    <div class="product__info__add">
+      <img data-img src="img/close.svg" alt="">
+      <span data-title class="name">Лист нержавеющий 406х3 мм 12Х18Н9 ГОСТ 5632-72</span>
+    </div>
+    <div class="buttons">
+      <span data-continue class="continue">Продолжить покупки</span>
+      <a href="basket.html" class="cart">В корзину</a>
+    </div>
+  </div>
 
-    <footer class="footer">
-        <div class="footer__top">
-            <div class="container">
-                <div class="footer__top__wrap">
-                    <a href="#" class="logo"><img src="img/logo.svg" alt=""></a>
-                    <p>Екатеринбург, ул. Малышева 51, этаж 16 <br>
-                        habarovsk@zakaz-met.ru <br>
-                        8 421 279-40-96</p>
-                </div>
-            </div>
+  <div class="form__popup" id="callback__popup">
+    <div class="form__inner">
+
+      <div data-message class="message form__message"></div>
+      <button class="close" data-fancybox-close>
+        <img src="img/close.svg" alt="">
+      </button>
+      <div class="form__popup__wrap">
+        <div class="top">
+          <span class="title">Свяжитесь со мной!</span>
+          <p>Наши менеджеры проконсультирую вас
+            и помогут сориентироваться в каталоге</p>
+          <form id="callback__form" action="/json/send-form.json" class="popup__form">
+            <input data-input type="text" name="name" id="" placeholder="Имя">
+            <input data-input type="tel" name="tel" id="" placeholder="Телефон">
+            <button type="button">Заказать звонок</button>
+            <label data-checkbox class="check__agree">
+              <input type="checkbox" name="consent" checked>
+              <span class="check"><img src="img/check2.svg" alt=""></span>
+              <span class="text">Даю согласие на обработку персональных данных</span>
+            </label>
+          </form>
         </div>
-        <div class="footer__bottom">
-            <div class="container">
-                <div class="footer__bottom__wrap">
-                    <div class="top">
-                        <div class="footer__lists">
-                            <div class="footer__list">
-                                <span class="label">Главная</span>
-                                <ul>
-                                    <li><a href="#">Популярные разделы</a></li>
-                                    <li><a href="#">Преимущества</a></li>
-                                    <li><a href="#">Каталог</a></li>
-                                    <li><a href="#">Поиск</a></li>
-                                </ul>
-                            </div>
-                            <div class="footer__list">
-                                <span class="label">Каталог</span>
-                                <ul>
-                                    <li><a href="#">Металлопрокат</a></li>
-                                    <li><a href="#">Металлоконструкции</a></li>
-                                    <li><a href="#">Емкости и резервуары</a></li>
-                                    <li><a href="#">Услуги и сервисы</a></li>
-                                </ul>
-                            </div>
-                            <div class="footer__list">
-                                <span class="label">О компании</span>
-                                <ul>
-                                    <li><a href="#">Информация</a></li>
-                                    <li><a href="#">Новости</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="footer__contacts">
-                            <p>Вся информация на сайте <br>
-                                не является публичной <a href="#">офертой</a>.</p>
-                                <a href="#" class="sup">Служба поддержки</a>
-                            <div class="footer__social">
-                                <a href="#"><img src="img/vk.svg" alt=""></a>
-                                <a href="#"><img src="img/insta.svg" alt=""></a>
-                                <a href="#"><img src="img/teleg.svg" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bottom">
-                        <a href="#" class="assort">
-                            <img src="img/assort.svg" alt="">
-                        </a>
-                        <p>Сайт создан на платформе <br>
-                            «<a href="#">В Ассортименте</a>». Пакет: <a href="#">Business</a> <br>
-                            © МеталлЭнергоХолдинг 2019 - 2021</p>
-                    </div>
-                </div>
-            </div>
+        <div class="img">
+          <img src="img/popup__bg.png" alt="">
         </div>
-    </footer>
+      </div>
+    </div>
 
+  </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
-    <script src="js/swiper.min.js"></script>
-    <script src="js/script.js"></script>
-   
+  <div class="form__popup" id="thanks__callback__popup">
+    <div class="form__inner">
+      <button class="close" data-fancybox-close>
+        <img src="img/close.svg" alt="">
+      </button>
+      <div class="form__popup__wrap">
+        <div class="top">
+          <span class="title">Спасибо,
+            ваша заявка отправлена!</span>
+          <p>Скоро наш оператор свяжется с вами!</p>
+        </div>
+        <div class="img">
+          <img src="img/popup__bg.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form__popup" id="fastbay__popup">
+    <div class="form__inner">
+      <div data-message class="message form__message"></div>
+      <button class="close" data-fancybox-close>
+        <img src="img/close.svg" alt="">
+      </button>
+      <div class="form__popup__wrap">
+        <div class="top">
+          <span class="title">Быстрый заказ</span>
+          <p>Заполните контактыне данные
+            и мы свяжемся с вами в ближайшее время</p>
+          <form id="fastbay__form" action="/json/send-form.json" class="popup__form">
+            <input type="text" class="dn" name="id">
+            <input data-input type="text" name="name" placeholder="Имя">
+            <input data-input type="tel" name="tel" placeholder="Телефон">
+            <button type="button">Отправить заявку</button>
+            <label data-checkbox class="check__agree">
+              <input type="checkbox" name="consent" checked>
+              <span class="check"><img src="img/check2.svg" alt=""></span>
+              <span class="text">Даю согласие на обработку персональных данных</span>
+            </label>
+          </form>
+        </div>
+        <div class="img">
+          <img src="img/popup__bg2.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form__popup" id="thanks__fastbay__popup">
+
+    <div class="form__inner">
+      <button class="close" data-fancybox-close>
+        <img src="img/close.svg" alt="">
+      </button>
+      <div class="form__popup__wrap">
+        <div class="top">
+          <span class="title">Спасибо,
+            ваша заявка отправлена!</span>
+          <p>Скоро наш оператор свяжется с вами
+            для уточнения деталей.</p>
+        </div>
+        <div class="img">
+          <img src="img/popup__bg2.png" alt="">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <script src="js/swiper.min.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/main.js"></script>
+
 
 
 
 </body>
+
 </html>

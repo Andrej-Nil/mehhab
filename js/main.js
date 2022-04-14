@@ -145,6 +145,10 @@ class Render {
     this._render($searchList, this.getSearchListHtml, response)
   }
 
+  renderSuccsesSendBasketForm = ($parent) => {
+    this._render($parent, this.getSuccsesSendBasketFormHtml)
+  }
+
   getMenuListHtml = (item) => {
 
     let subMenuOpen = '';
@@ -232,6 +236,20 @@ class Render {
     return (/*html */`
       <button href="#" type="submit" class="view__all">Показать все результаты (${response.count} ${wordThisEnding})</button>
     `);
+  }
+
+  getSuccsesSendBasketFormHtml = () => {
+    return (/*html*/`
+      <div class="basket-empty">
+      <p class="basket-empty__text">Заказ успешно отправлен!</p>
+
+      <div class="basket-empty__bottom">
+      <a href="index.html" class="basket-empty__link">На главную</a>
+      <a href="catalog.html" class="basket-empty__link">Каталог</a>
+      </div>
+     
+      </div>
+    `)
   }
 
   getMarkList = (getMarkFun, arr) => {
@@ -341,7 +359,7 @@ class Form {
   };
 
   showCheckboxAnimation = ($checkbox) => {
-    const $label = $checkbox.closest('.check__agree');
+    const $label = $checkbox.closest('[data-checkbox]');
     $label.classList.add('shake');
     setTimeout(() => {
       $label.classList.remove('shake');
@@ -358,11 +376,63 @@ class Form {
     if (e.target.closest('[data-input]')) {
       this.checkInput(e.target)
     }
-
   }
   listeners = () => {
     this.$form.addEventListener('input', this.inputHandler);
     this.$form.addEventListener('submit', this.sendHanler);
+  }
+}
+
+class Basket {
+  constructor(id) {
+    this.$basket = document.querySelector(id);
+    this.init();
+  }
+
+  init = () => {
+    if (!this.$basket) return;
+    this.$messageForm = this.$basket.querySelector('[data-message]');
+    this.form = new Form('#basketForm');
+    this.$submitBtn = this.$basket.querySelector('[data-submit]');
+    this.responseForm = null;
+    this.listeners();
+  }
+
+  sendBasketForm = async () => {
+    this.responseForm = await this.form.send();
+    this.resultHandler(this.$messageForm, this.responseForm, this.succsesSendForm);
+  }
+
+  resultHandler = ($message, response, successFn) => {
+    if (!response) {
+      message.showMessage($message, 'Произошла ошибка!');
+    }
+    if (response.rez == 0) {
+      message.showMessage($message, response.error.desc);
+    } else if (response.status) {
+      message.showMessage($message, 'Произошла ошибка!');
+    } else {
+      successFn()
+    }
+  }
+
+  clearBasket = () => {
+    render.clearParent(this.$basket);
+    render.renderSuccsesSendBasketForm(this.$basket);
+    window.scrollTo(0, 104)
+
+  }
+
+  succsesSendForm = () => {
+    this.clearBasket()
+  }
+
+  clickHandler = (e) => {
+
+  }
+
+  listeners = () => {
+    this.$submitBtn.addEventListener('click', this.sendBasketForm)
   }
 }
 
@@ -1032,28 +1102,24 @@ class ProductCard {
   }
 }
 
-
-
 const debaunce = new Debaunce();
 const server = new Server();
 const message = new Message();
 const wordEndingsInstaller = new WordEndingsInstaller()
 const render = new Render();
 const sidebarMenu = new SidebarMenu();
+const basket = new Basket('#basketContent');
 const callbackModal = new CallbackModal('#callback__popup', '#callback__form');
 const callbackModalSucsses = new Modal('#thanks__callback__popup');
-
 const fastOrderModal = new FastOrderModal('#fastbay__popup', '#fastbay__form');
 const fastOrdekModalSucsses = new Modal('#thanks__fastbay__popup');
-
 const modalInfo = new ModalInfo('#modalInfo');
-
-
 const catalogList = new CatalogList('#catalogList');
 const search = new Search('#searchProduct');
 const popularGoodsSwitch = new СontentSwitch('#popularGoods');
 const contentSwitchSelect = new СontentSwitchSelect('#popularSelect');
 const productCard = new ProductCard();
+
 
 
 
