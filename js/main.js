@@ -39,6 +39,7 @@ class Server {
     this.searchApi = '../json/search.json';
     this.addFavoriteApi = '../json/addFavorite.json';
     this.addBasketApi = '../json/addBasket.json';
+    this.deleteProductApi = '../json/removeBasket.json';
     this.dataCreator = new DataCreator();
   }
 
@@ -66,6 +67,11 @@ class Server {
   addBasket = async (productId) => {
     const data = this.dataCreator.createFormData({ productId });
     return await this.getResponse(this.POST, data, this.addBasketApi);
+  }
+
+  deleteProductInBasket = async (productId) => {
+    const data = this.dataCreator.createFormData({ productId });
+    return await this.getResponse(this.POST, data, this.deleteProductApi);
   }
 
   getResponse = async (method, data, api) => {
@@ -145,8 +151,8 @@ class Render {
     this._render($searchList, this.getSearchListHtml, response)
   }
 
-  renderSuccsesSendBasketForm = ($parent) => {
-    this._render($parent, this.getSuccsesSendBasketFormHtml)
+  renderEmptyBasket = ($parent, text) => {
+    this._render($parent, this.getEmptyBasketHtml, text)
   }
 
   getMenuListHtml = (item) => {
@@ -238,16 +244,15 @@ class Render {
     `);
   }
 
-  getSuccsesSendBasketFormHtml = () => {
+  getEmptyBasketHtml = (text) => {
     return (/*html*/`
       <div class="basket-empty">
-      <p class="basket-empty__text">Заказ успешно отправлен!</p>
+        <p class="basket-empty__text">${text}</p>
 
-      <div class="basket-empty__bottom">
-      <a href="index.html" class="basket-empty__link">На главную</a>
-      <a href="catalog.html" class="basket-empty__link">Каталог</a>
-      </div>
-     
+        <div class="basket-empty__bottom">
+          <a href="index.html" class="basket-empty__link">На главную</a>
+          <a href="catalog.html" class="basket-empty__link">Каталог</a>
+        </div>
       </div>
     `)
   }
@@ -274,6 +279,10 @@ class Render {
 
   clearParent = ($el) => {
     $el.innerHTML = ''
+  }
+
+  deleteEl = ($el) => {
+    $el.remove();
   }
 
 }
@@ -394,44 +403,66 @@ class Basket {
     this.$messageForm = this.$basket.querySelector('[data-message]');
     this.form = new Form('#basketForm');
     this.$submitBtn = this.$basket.querySelector('[data-submit]');
-    this.responseForm = null;
     this.listeners();
   }
 
   sendBasketForm = async () => {
-    this.responseForm = await this.form.send();
-    this.resultHandler(this.$messageForm, this.responseForm, this.succsesSendForm);
+    const response = await this.form.send();
+    this.resultHandler(this.$messageForm, response, this.succsesSendForm, 'Заявка успешно отправлена!');
   }
 
-  resultHandler = ($message, response, successFn) => {
+
+
+  clearBasket = (text) => {
+    render.clearParent(this.$basket);
+    render.renderEmptyBasket(this.$basket, text);
+    window.scrollTo(0, 104)
+  }
+
+  succsesSendForm = () => {
+    const text = 'Заявка успешно отправлена! В ближайшее время с вами свяжет  ся менеджер';
+    this.clearBasket(text);
+  }
+
+  deleteCard = async ($btn) => {
+    const $card = $btn.closest('[data-product]');
+    const $message = $card.querySelector('[data-message]');
+    const response = await server.deleteProductInBasket($card.dataset.product);
+    //const response = null;
+    this.resultHandler($message, response, this.succsesDeleteProducr, $card);
+  }
+
+  succsesDeleteProducr = ($card) => {
+    const text = 'Ваша корзина пуста';
+    render.deleteEl($card);
+    const countCardInBasket = this.$basket.querySelectorAll('[data-product]').length;
+    if (countCardInBasket == 0) {
+      this.clearBasket(text);
+    }
+  }
+
+  clickHandler = (e) => {
+    if (e.target.closest('[data-delete]')) {
+      this.deleteCard(e.target.closest('[data-delete]'));
+    }
+  }
+
+  resultHandler = ($message, response, succsesFn, argForsuccsesFn) => {
     if (!response) {
-      message.showMessage($message, 'Произошла ошибка!');
+      message.showMessage($message, 'Произошла ошибка. Повторите попытку позже.');
+      return;
     }
     if (response.rez == 0) {
       message.showMessage($message, response.error.desc);
     } else if (response.status) {
-      message.showMessage($message, 'Произошла ошибка!');
+      message.showMessage($message, 'Произошла ошибка. Повторите попытку позже.');
     } else {
-      successFn()
+      succsesFn(argForsuccsesFn);
     }
   }
 
-  clearBasket = () => {
-    render.clearParent(this.$basket);
-    render.renderSuccsesSendBasketForm(this.$basket);
-    window.scrollTo(0, 104)
-
-  }
-
-  succsesSendForm = () => {
-    this.clearBasket()
-  }
-
-  clickHandler = (e) => {
-
-  }
-
   listeners = () => {
+    this.$basket.addEventListener('click', this.clickHandler);
     this.$submitBtn.addEventListener('click', this.sendBasketForm)
   }
 }
