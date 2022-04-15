@@ -1311,6 +1311,23 @@ h3 {
   }
 }
 
+.catalog-item__link {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ccc;
+}
+
+.catalog-item.active {
+  background: #d20018;
+  border: 1px solid #fff;
+}
+
+.catalog-item.active .catalog-item__link {
+  color: #fff;
+}
+
 .catalog-sublist {
   position: absolute;
   width: 100%;
@@ -2509,45 +2526,45 @@ h3 {
   }
 }
 
-.popular__goods__content2 {
+.categories .popular__goods__content2 {
   width: 100%;
   margin-bottom: 80px;
 }
 
-.popular__goods__content2 .popular__goods__items {
+.categories .popular__goods__content2 .popular__goods__items {
   justify-content: flex-start;
   margin-bottom: 80px;
 }
 
 @media (max-width: 710px) {
-  .popular__goods__content2 .popular__goods__items {
+  .categories .popular__goods__content2 .popular__goods__items {
     margin-bottom: 20px;
   }
 }
 
 @media (max-width: 560px) {
-  .popular__goods__content2 .popular__goods__items {
+  .categories .popular__goods__content2 .popular__goods__items {
     justify-content: space-between;
     margin-bottom: 20px;
   }
 }
 
-.popular__goods__content2 .popular__goods__item {
+.categories .popular__goods__content2 .popular__goods__item {
   margin-bottom: 15px;
   margin-right: 12px;
 }
 
-.popular__goods__content2 .popular__goods__item:nth-child(3n + 3) {
+.categories .popular__goods__content2 .popular__goods__item:nth-child(3n + 3) {
   margin-right: 0;
 }
 
 @media (max-width: 560px) {
-  .popular__goods__content2 .popular__goods__item {
+  .categories .popular__goods__content2 .popular__goods__item {
     margin-right: 0;
   }
 }
 
-.popular__goods__content2 .popular__goods__item__row {
+.categories .popular__goods__content2 .popular__goods__item__row {
   width: 100%;
   padding: 25px 20px;
   background: #424242;
@@ -2560,12 +2577,12 @@ h3 {
 }
 
 @media (max-width: 600px) {
-  .popular__goods__content2 .popular__goods__item__row {
+  .categories .popular__goods__content2 .popular__goods__item__row {
     padding: 14px;
   }
 }
 
-.popular__goods__content2 .popular__goods__item__row .info {
+.categories .popular__goods__content2 .popular__goods__item__row .info {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -2576,13 +2593,13 @@ h3 {
 }
 
 @media (max-width: 600px) {
-  .popular__goods__content2 .popular__goods__item__row .info {
+  .categories .popular__goods__content2 .popular__goods__item__row .info {
     flex-direction: column;
     align-items: flex-start;
   }
 }
 
-.popular__goods__content2 .popular__goods__item__row .popular__goods__item__row__nav {
+.categories .popular__goods__content2 .popular__goods__item__row .popular__goods__item__row__nav {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -2591,12 +2608,12 @@ h3 {
 }
 
 @media (max-width: 600px) {
-  .popular__goods__content2 .popular__goods__item__row .popular__goods__item__row__nav {
+  .categories .popular__goods__content2 .popular__goods__item__row .popular__goods__item__row__nav {
     flex-direction: column;
   }
 }
 
-.popular__goods__content2 .popular__goods__item__row .name {
+.categories .popular__goods__content2 .popular__goods__item__row .name {
   font-size: 18px;
   line-height: 120%;
   color: #ffffff;
@@ -2605,27 +2622,27 @@ h3 {
 }
 
 @media (max-width: 600px) {
-  .popular__goods__content2 .popular__goods__item__row .name {
+  .categories .popular__goods__content2 .popular__goods__item__row .name {
     margin-bottom: 21px;
     padding-right: 10px;
   }
 }
 
 @media (max-width: 760px) {
-  .popular__goods__content2 .popular__goods__item__row .name {
+  .categories .popular__goods__content2 .popular__goods__item__row .name {
     font-size: 16px;
     line-height: 20px;
   }
 }
 
 @media (max-width: 400px) {
-  .popular__goods__content2 .popular__goods__item__row .name {
+  .categories .popular__goods__content2 .popular__goods__item__row .name {
     font-size: 14px;
     line-height: 17px;
   }
 }
 
-.popular__goods__content2 .popular__goods__item__row .cost {
+.categories .popular__goods__content2 .popular__goods__item__row .cost {
   font-weight: 600;
   font-size: 24px;
   line-height: 29px;
@@ -2642,13 +2659,13 @@ h3 {
 }
 
 @media (max-width: 500px) {
-  .popular__goods__content2 .popular__goods__item__row .cost {
+  .categories .popular__goods__content2 .popular__goods__item__row .cost {
     font-size: 20px;
     line-height: 20px;
   }
 }
 
-.popular__goods__content2 .popular__goods__item__row .cost:before {
+.categories .popular__goods__content2 .popular__goods__item__row .cost:before {
   content: attr(data-sale);
   position: absolute;
   left: 0;
@@ -2660,8 +2677,8 @@ h3 {
   text-decoration-color: #d20018;
 }
 
-.popular__goods__content2 .popular__goods__item__row .favorite,
-.popular__goods__content2 .popular__goods__item__row .add__cart {
+.categories .popular__goods__content2 .popular__goods__item__row .favorite,
+.categories .popular__goods__content2 .popular__goods__item__row .add__cart {
   width: 50px;
   min-width: 50px;
   height: 50px;
@@ -2675,8 +2692,8 @@ h3 {
   margin-left: 20px;
 }
 
-.popular__goods__content2 .popular__goods__item__row .favorite input,
-.popular__goods__content2 .popular__goods__item__row .add__cart input {
+.categories .popular__goods__content2 .popular__goods__item__row .favorite input,
+.categories .popular__goods__content2 .popular__goods__item__row .add__cart input {
   position: absolute;
   opacity: 0;
   z-index: 2;
@@ -2687,20 +2704,24 @@ h3 {
   height: 100%;
 }
 
-.popular__goods__content2 .popular__goods__item__row .favorite svg path,
-.popular__goods__content2 .popular__goods__item__row .add__cart svg path {
+.categories .popular__goods__content2 .popular__goods__item__row .favorite svg path,
+.categories .popular__goods__content2 .popular__goods__item__row .add__cart svg path {
   transition: 0.3s;
 }
 
-.popular__goods__content2 .popular__goods__item__row .favorite input:checked + svg path,
-.popular__goods__content2 .popular__goods__item__row .add__cart input:checked + svg path {
+.categories .popular__goods__content2 .popular__goods__item__row .favorite input:checked + svg path,
+.categories .popular__goods__content2 .popular__goods__item__row .add__cart input:checked + svg path {
   fill: #fff;
 }
 
 @media (max-width: 600px) {
-  .popular__goods__content2 .popular__goods__item__row .add__cart {
+  .categories .popular__goods__content2 .popular__goods__item__row .add__cart {
     margin-bottom: 10px;
   }
+}
+
+.categories__list {
+  display: grid;
 }
 
 .pagination {
