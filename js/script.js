@@ -45,7 +45,6 @@ jQuery(document).ready(function ($) {
   $('.tabs__nav a').click(function (e) {
     e.preventDefault();
     var dataTab = $(this).attr('data-tabs');
-    console.log(dataTab);
     $('.product__item__hidden').removeClass('active');
     $('.tabs__nav a').removeClass('active');
     $(this).addClass('active');
