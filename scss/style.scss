@@ -1152,12 +1152,16 @@ h3 {
 }
 
 .popular__goods__items {
-  display: none;
+  @include flex(stretch, space-between, wrap);
   width: 100%;
 }
 
+.popular__goods__items--tab {
+  display: none;
+}
+
 .popular__goods__items.active {
-  @include flex(stretch, space-between, wrap);
+  display: flex;
 }
 
 .popular__goods__item {

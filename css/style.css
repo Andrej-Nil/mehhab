@@ -1503,16 +1503,20 @@ h3 {
 }
 
 .popular__goods__items {
-  display: none;
-  width: 100%;
-}
-
-.popular__goods__items.active {
   display: flex;
   flex-direction: row;
   align-items: stretch;
   justify-content: space-between;
   flex-wrap: wrap;
+  width: 100%;
+}
+
+.popular__goods__items--tab {
+  display: none;
+}
+
+.popular__goods__items.active {
+  display: flex;
 }
 
 .popular__goods__item {
