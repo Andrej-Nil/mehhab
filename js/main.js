@@ -523,9 +523,12 @@ class ProductCounter {
       return;
     } else {
       $input.value = response.content[0].count;
-      $totalPrice.innerHTML = `${response.content[0].total_price} ₽`
+      if ($totalPrice) {
+        $totalPrice.innerHTML = `${response.content[0].total_price} ₽`;
+      }
+
       if (this.$totalPriceBasket) {
-        this.$totalPriceBasket.innerHTML = `Итотго: ${response.card.total_price} ₽`
+        this.$totalPriceBasket.innerHTML = `Итотго: ${response.card.total_price} ₽`;
       }
     }
 
@@ -1168,6 +1171,16 @@ class ProductCard {
 
   }
 
+  addBasketWithBtn = async ($btn) => {
+    const id = $btn.closest('[data-product]');
+    const response = await server.addBasket({ count: 1, id: id });
+    this.resultHandler($btn, response, this.succesAddBasketWithBtn);
+  }
+  succesAddBasketWithBtn = ($btn, response) => {
+    if (response.toggle) {
+      $btn.innerHTML = "В карзине";
+    }
+  }
 
   succesAddFavorite = ($btn, response) => {
     this.toggleIcon($btn, response.toggle);
@@ -1212,6 +1225,10 @@ class ProductCard {
     if (e.target.closest('[data-add]')) {
       const $btn = e.target.closest('[data-add]');
       this.addHandler($btn);
+    }
+    if (e.target.closest('[data-in-basket]')) {
+      const $btn = e.target.closest('[data-in-basket]');
+      this.addBasketWithBtn($btn);
     }
   }
 

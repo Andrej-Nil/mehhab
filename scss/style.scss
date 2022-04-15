@@ -1696,6 +1696,7 @@ h3 {
 }
 
 .news__article {
+  margin-top: 50px;
   width: 100%;
   padding: 20px;
   background: #424242;
@@ -2342,6 +2343,7 @@ h3 {
       }
     }
     .favorite {
+      cursor: pointer;
       width: 40px;
       min-width: 40px;
       height: 40px;
@@ -2349,26 +2351,11 @@ h3 {
       @include flex(center, center);
       position: relative;
       margin-left: 20px;
-      input {
-        position: absolute;
-        opacity: 0;
-        z-index: 2;
-        cursor: pointer;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-      }
-      svg {
-        width: 20px;
-        path {
-          transition: 0.3s;
-        }
-      }
-      input:checked + svg {
-        path {
-          fill: #fff;
-        }
+    }
+    .favorite.active,
+    .add__cart.active svg {
+      path {
+        fill: #fff;
       }
     }
   }
@@ -2453,7 +2440,8 @@ h3 {
         @media (max-width: 420px) {
           width: 100%;
         }
-        a {
+        span {
+          cursor: pointer;
           width: 100%;
           height: 40px;
           @include flex(center, center);
