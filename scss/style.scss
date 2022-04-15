@@ -1892,131 +1892,125 @@ h3 {
 .categories .popular__goods__content2 {
   width: 100%;
   margin-bottom: 80px;
-  .popular__goods__items {
-    justify-content: flex-start;
-    margin-bottom: 80px;
-    @media (max-width: 710px) {
-      margin-bottom: 20px;
-    }
-    @media (max-width: 560px) {
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
+}
+
+.popular__goods__list {
+  justify-content: flex-start;
+  margin-bottom: 80px;
+  @media (max-width: 710px) {
+    margin-bottom: 20px;
   }
-  .popular__goods__item {
-    margin-bottom: 15px;
-    // width: calc(100% / 3 - 8px);
-    margin-right: 12px;
-    &:nth-child(3n + 3) {
-      margin-right: 0;
-    }
-    @media (max-width: 560px) {
-      margin-right: 0;
-    }
+  @media (max-width: 560px) {
+    justify-content: space-between;
+    margin-bottom: 20px;
   }
-  .popular__goods__item__row {
+}
+.popular__goods__item {
+  margin-bottom: 15px;
+  // width: calc(100% / 3 - 8px);
+  margin-right: 12px;
+  &:nth-child(3n + 3) {
+    margin-right: 0;
+  }
+  @media (max-width: 560px) {
+    margin-right: 0;
+  }
+}
+.popular__goods__list__row {
+  width: 100%;
+  padding: 25px 20px;
+  background: #424242;
+  border: 0.5px solid #777777;
+  @include flex(center, space-between);
+  @media (max-width: 600px) {
+    padding: 14px;
+  }
+  .info {
     width: 100%;
-    padding: 25px 20px;
-    background: #424242;
-    border: 0.5px solid #777777;
     @include flex(center, space-between);
+    padding-right: 20px;
     @media (max-width: 600px) {
-      padding: 14px;
+      flex-direction: column;
+      align-items: flex-start;
     }
-    .info {
-      width: 100%;
-      @include flex(center, space-between);
-      padding-right: 20px;
-      @media (max-width: 600px) {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+  }
+  .popular__goods__item__row__nav {
+    @include flex(center);
+    @media (max-width: 600px) {
+      flex-direction: column;
     }
-    .popular__goods__item__row__nav {
-      @include flex(center);
-      @media (max-width: 600px) {
-        flex-direction: column;
-      }
+  }
+  .name {
+    font-size: 18px;
+    line-height: 120%;
+    color: #ffffff;
+    display: block;
+    padding-right: 20px;
+    @media (max-width: 600px) {
+      margin-bottom: 21px;
+      padding-right: 10px;
     }
-    .name {
-      font-size: 18px;
-      line-height: 120%;
-      color: #ffffff;
-      display: block;
-      padding-right: 20px;
-      @media (max-width: 600px) {
-        margin-bottom: 21px;
-        padding-right: 10px;
-      }
-      @media (max-width: 760px) {
-        font-size: 16px;
-        line-height: 20px;
-      }
-      @media (max-width: 400px) {
-        font-size: 14px;
-        line-height: 17px;
-      }
+    @media (max-width: 760px) {
+      font-size: 16px;
+      line-height: 20px;
     }
-    .cost {
-      font-weight: 600;
-      font-size: 24px;
-      line-height: 29px;
-      text-align: center;
-      color: #ffffff;
-      white-space: nowrap;
-      @media (max-width: 500px) {
-        font-size: 20px;
-        line-height: 20px;
-      }
-      @include flex(flex-start, flex-start, nowrap, column);
-      padding-top: 20px;
-      position: relative;
-      &:before {
-        content: attr(data-sale);
-        position: absolute;
-        left: 0;
-        top: 0;
-        font-size: 17px;
-        line-height: 20px;
-        color: #bfbbbb;
-        text-decoration: line-through;
-        text-decoration-color: #d20018;
-      }
+    @media (max-width: 400px) {
+      font-size: 14px;
+      line-height: 17px;
     }
-    .favorite,
-    .add__cart {
-      width: 50px;
-      min-width: 50px;
-      height: 50px;
-      background: #777777;
-      @include flex(center, center);
-      position: relative;
-      margin-left: 20px;
-      input {
-        position: absolute;
-        opacity: 0;
-        z-index: 2;
-        cursor: pointer;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-      }
-      svg {
-        path {
-          transition: 0.3s;
-        }
-      }
-      input:checked + svg {
-        path {
-          fill: #fff;
-        }
+  }
+  .cost {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    color: #ffffff;
+    white-space: nowrap;
+    @media (max-width: 500px) {
+      font-size: 20px;
+      line-height: 20px;
+    }
+    @include flex(flex-start, flex-start, nowrap, column);
+    padding-top: 20px;
+    position: relative;
+    &:before {
+      content: attr(data-sale);
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: 17px;
+      line-height: 20px;
+      color: #bfbbbb;
+      text-decoration: line-through;
+      text-decoration-color: #d20018;
+    }
+  }
+  .favorite,
+  .add__cart {
+    width: 50px;
+    min-width: 50px;
+    height: 50px;
+    background: #777777;
+    @include flex(center, center);
+    position: relative;
+    margin-left: 20px;
+    cursor: pointer;
+    svg {
+      path {
+        transition: 0.3s;
       }
     }
-    .add__cart {
-      @media (max-width: 600px) {
-        margin-bottom: 10px;
-      }
+  }
+
+  .favorite.active,
+  .add__cart.active svg {
+    path {
+      fill: #fff;
+    }
+  }
+  .add__cart {
+    @media (max-width: 600px) {
+      margin-bottom: 10px;
     }
   }
 }
