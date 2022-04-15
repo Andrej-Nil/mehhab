@@ -64,9 +64,9 @@ class Server {
     return await this.getResponse(this.POST, data, this.addFavoriteApi);
   }
 
-  addBasket = async (productId) => {
-    const data = this.dataCreator.createFormData({ productId });
-    return await this.getResponse(this.POST, data, this.addBasketApi);
+  addBasket = async (data) => {
+    const body = this.dataCreator.createFormData(data);
+    return await this.getResponse(this.POST, body, this.addBasketApi);
   }
 
   deleteProductInBasket = async (productId) => {
@@ -403,6 +403,7 @@ class Basket {
     this.$messageForm = this.$basket.querySelector('[data-message]');
     this.form = new Form('#basketForm');
     this.$submitBtn = this.$basket.querySelector('[data-submit]');
+    this.$totalPriceBasket = this.$basket.querySelector('[data-price]');
     this.listeners();
   }
 
@@ -428,16 +429,17 @@ class Basket {
     const $card = $btn.closest('[data-product]');
     const $message = $card.querySelector('[data-message]');
     const response = await server.deleteProductInBasket($card.dataset.product);
-    //const response = null;
     this.resultHandler($message, response, this.succsesDeleteProducr, $card);
   }
 
-  succsesDeleteProducr = ($card) => {
+  succsesDeleteProducr = (response, $card) => {
     const text = 'Ваша корзина пуста';
     render.deleteEl($card);
     const countCardInBasket = this.$basket.querySelectorAll('[data-product]').length;
+    this.$totalPriceBasket.innerHTML = `Итого: ${response.card.total_price} ₽ `
     if (countCardInBasket == 0) {
       this.clearBasket(text);
+      this.$totalPriceBasket.innerHTML = this.$totalPriceBasket.innerHTML = `Итотго: ${response.card.total_price} ₽`;
     }
   }
 
@@ -457,7 +459,7 @@ class Basket {
     } else if (response.status) {
       message.showMessage($message, 'Произошла ошибка. Повторите попытку позже.');
     } else {
-      succsesFn(argForsuccsesFn);
+      succsesFn(response, argForsuccsesFn);
     }
   }
 
@@ -465,6 +467,91 @@ class Basket {
     this.$basket.addEventListener('click', this.clickHandler);
     this.$submitBtn.addEventListener('click', this.sendBasketForm)
   }
+}
+
+class ProductCounter {
+  constructor() {
+    this.init();
+  }
+
+  init = () => {
+    this.$totalPriceBasket = document.querySelector('[data-price]');
+    this.listeners();
+  }
+
+  changeValue = async ($target) => {
+    const $card = $target.closest('[data-product]');
+    const id = $card.dataset.product;
+    const $totalPrice = $card.querySelector('[data-total-propuct-price]');
+    const $counter = $target.closest('[data-counter]');
+    const $input = $counter.querySelector('[data-count]');
+    const value = +$input.value;
+    const newValue = this.calcValue($target, value);
+    if (newValue == value) return;
+
+    const response = await server.addBasket({ count: newValue, id: id });
+    this.resultHandler($input, $totalPrice, response);
+  }
+
+  calcValue = ($target, value) => {
+    let newValue;
+    if ($target.dataset.counterBtn == 'inc') {
+      newValue = this.inc(value);
+    }
+    if ($target.dataset.counterBtn == 'dec') {
+      newValue = this.dec(value);
+    }
+
+    return newValue;
+  }
+
+  inc = (value) => {
+    return ++value
+  }
+
+  dec = (value) => {
+    if (value <= 1) return 1;
+    return --value
+  }
+
+  resultHandler = ($input, $totalPrice, response) => {
+    if (!response) return;
+
+    if (response.rez == 0) {
+      return;
+    } else if (response.status) {
+      return;
+    } else {
+      $input.value = response.content[0].count;
+      $totalPrice.innerHTML = `${response.content[0].total_price} ₽`
+      if (this.$totalPriceBasket) {
+        this.$totalPriceBasket.innerHTML = `Итотго: ${response.card.total_price} ₽`
+      }
+    }
+
+
+  }
+
+
+  clickHandler = (e) => {
+    if (e.target.closest(`[data-counter-btn]`)) {
+      this.changeValue(e.target);
+    }
+
+  }
+
+  changeHandler = () => {
+
+  }
+
+
+
+  listeners = () => {
+    document.addEventListener('click', this.clickHandler);
+    document.addEventListener('input', this.changeHandler);
+    document.addEventListener('change', this.changeHandler);
+  }
+
 }
 
 class Message {
@@ -1076,7 +1163,7 @@ class ProductCard {
   }
 
   addBasket = async (productId, $btn) => {
-    const response = await server.addBasket(productId);
+    const response = await server.addBasket({ count: 1, id: productId });
     this.resultHandler($btn, response, this.succesAddBasket);
 
   }
@@ -1140,6 +1227,7 @@ const wordEndingsInstaller = new WordEndingsInstaller()
 const render = new Render();
 const sidebarMenu = new SidebarMenu();
 const basket = new Basket('#basketContent');
+const productCounter = new ProductCounter();
 const callbackModal = new CallbackModal('#callback__popup', '#callback__form');
 const callbackModalSucsses = new Modal('#thanks__callback__popup');
 const fastOrderModal = new FastOrderModal('#fastbay__popup', '#fastbay__form');
